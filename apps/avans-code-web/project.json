@@ -1,0 +1,92 @@
+{
+  "name": "avans-code-web",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "avans-code",
+  "sourceRoot": "apps/avans-code-web/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/avans-code-web",
+        "index": "apps/avans-code-web/src/index.html",
+        "browser": "apps/avans-code-web/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/avans-code-web/tsconfig.app.json",
+        "assets": [
+          "apps/avans-code-web/src/favicon.ico",
+          "apps/avans-code-web/src/assets"
+        ],
+        "styles": ["apps/avans-code-web/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "avans-code-web:build:production"
+        },
+        "development": {
+          "buildTarget": "avans-code-web:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "avans-code-web:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/avans-code-web/**/*.ts",
+          "apps/avans-code-web/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/avans-code-web/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "avans-code-web:build",
+        "staticFilePath": "dist/apps/avans-code-web/browser"
+      }
+    }
+  }
+}
