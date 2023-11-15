@@ -1,10 +1,15 @@
 import { Route } from '@angular/router';
+import {AboutComponent} from "@avans-code/ui/features";
 
 export const appRoutes: Route[] = [
   {
     path: '',
     pathMatch: 'full',
     redirectTo: 'users'
+  },
+  {
+    path: 'about',
+    component: AboutComponent
   },
   {
     path: 'users',

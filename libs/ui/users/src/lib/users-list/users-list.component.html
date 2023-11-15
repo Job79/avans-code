@@ -1,3 +1,9 @@
-<div class="text-blue-800">
-  <p>users-list works!</p>
+<div class="w-[calc(100vw-1rem)] max-w-[50rem]">
+  <p class="card-title">Users</p>
+  <div class="card">
+    <div *ngFor="let user of users | async">
+      {{user.name}}
+    </div>
+  </div>
 </div>
+

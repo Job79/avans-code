@@ -1,0 +1,23 @@
+<nav class="flex items-center justify-between flex-wrap bg-red-800 p-6">
+  <div class="flex items-center flex-shrink-0 text-white mr-6">
+    <svg class="fill-current mr-2 h-16 w-16" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><path d="M113 49 27 99v201l86 49 87 50c1 0 41-22 88-50l86-49V99l-85-49-88-50c-3 0-14 7-88 49m115 96 10 5-55 109-19-10c-1-1 53-109 54-109l10 5m80 78-24 24-8-8-8-8 16-16 16-16-16-16-16-15 8-8 8-8 24 23 24 24-24 24m-183-63 8 8-16 15-16 16 16 16 16 16-8 8-8 7-23-23-24-24 23-23 24-24 8 8"/></svg>
+    <span class="font-semibold text-xl tracking-tight">Code</span>
+  </div>
+  <div class="block md:hidden">
+    <button (click)="hidden = !hidden" class="flex items-center px-3 py-2 border rounded text-red-100 border-red-300 hover:text-white hover:border-white">
+      <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+      </svg>
+    </button>
+  </div>
+  <div [ngClass]="{'!block': !hidden}" class="hidden w-full flex-grow md:flex md:items-center md:w-auto">
+    <div class="text-sm md:flex-grow">
+      <a routerLink="/users" class="block mt-4 md:inline-block md:mt-0 text-red-100 hover:text-white mr-4">
+        Users
+      </a>
+      <a routerLink="/about" class="block mt-4 md:inline-block md:mt-0 text-red-100 hover:text-white">
+        About
+      </a>
+    </div>
+  </div>
+</nav>
