@@ -17,6 +17,7 @@
         "tsConfig": "apps/avans-code-web/tsconfig.app.json",
         "assets": [
           "apps/avans-code-web/src/favicon.ico",
+          "apps/avans-code-web/src/staticwebapp.config.json",
           "apps/avans-code-web/src/assets"
         ],
         "styles": ["apps/avans-code-web/src/styles.css"],
