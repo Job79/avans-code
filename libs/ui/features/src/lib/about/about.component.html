@@ -1,1 +1,56 @@
-<p>about works!</p>
+<div class="card-header">
+  <p class="card-title">About</p>
+</div>
+<div class="card p-4">
+  <p>
+    Tijdens de opleiding informatica worden er vaak programmeer opdrachten gegeven, denk bijvoorbeeld aan de vakken
+    programmeren 1 & 2 of algoritmen en datastructuren. Vaak krijgen deze opdrachten weinig feedback of worden deze
+    slecht gemaakt en niet ingeleverd.
+    <br><br>
+    Om de studenten extra te motiveren, en ervoor te zorgen dat deze vaker feedback krijgen op hun opdrachten wordt er
+    een nieuw systeem ontworpen. Hierin kunnen studenten programmeeropdrachten vinden en inleveren. Nadat deze zijn
+    ingeleverd en getest kunnen studenten de oplossing van medestudenten inzien en hierop reageren. Hierdoor krijgen
+    studenten meer feedback op hun code en kunnen ze alternatieve oplossingen inzien. Omdat de opdrachten pas zichtbaar
+    worden nadat de student zelf de opdracht heeft gemaakt, zal deze niet vals kunnen spelen.
+  </p>
+
+  <b class="block mt-5">Opdrachten</b>
+  <p>
+    Het systeem zal opdrachten bevatten. Deze worden in het systeem gezet door leraren of ouderejaars studenten. Deze
+    opdrachten bevatten een naam, beschrijving, versie, programmeertaal, templateCode, testCode, tags en niveau. De tags
+    worden gebruikt om op de opdrachten te filteren, en deze bevatten bijvoorbeeld de naam van het vak. De versie zal
+    omhoog gaan bij elke aanpassing, zodat de gebruiker kan zien of een oplossing voor de laatste versie is gemaakt.
+
+    Niet iedereen kan elke tag aan zijn opdracht toevoegen, ouderejaars studenten kunnen bijvoorbeeld niet de tags voor
+    een vak toevoegen. Dit is om verwarring te voorkomen.
+
+    Een opdracht zal in de toekomst een geautomatiseerde test uitvoeren wanneer er een oplossing wordt ingeleverd. Maar
+    omdat hiervoor veel logica nodig zal zijn om dit op een veilige manier uit te voeren en dit niet relevant is voor
+    client-side web frameworks of nosql is dit er voor nu uitgelaten.
+  </p>
+
+  <b class="block mt-5">Oplossingen</b>
+  <p>
+    Wanneer een student een opdracht heeft gemaakt kan deze zijn oplossing uploaden. Deze wordt dan zichtbaar voor
+    andere studenten. Nadat de student de opdracht heeft gemaakt kan deze ook oplossingen van andere studenten inzien en
+    hierop reageren. Het is voor een student mogelijk om een oplossing meerdere keren in te leveren.
+
+    Ook kan de student een opdracht van iemand “liken”, waardoor deze bovenaan de lijst met oplossingen komt te staan.
+    Hierdoor zal een student als eerst de beste oplossingen te zien krijgen.
+  </p>
+
+  <b class="block mt-5">Commentaar</b>
+  <p>
+    Nadat een student zijn oplossing heeft ingeleverd kan deze feedback geven aan andere studenten. Deze feedback zal
+    dan getoond worden onder de oplossing.
+  </p>
+
+  <b class="block mt-5">Tag</b>
+  <p>
+    Tags worden beheerd door de leraren. Deze kunnen nieuwe tags aanmaken en verwijderen. Een tag kan inactief zijn,
+    deze kan dan niet meer worden toegevoegd aan nieuwe opdrachten, maar zal in het systeem blijven staan.
+  </p>
+
+  <b class="block mt-5">Entity Relationship Diagram</b>
+  <img src="/assets/erd.svg" alt="Entity Relationship Diagram">
+</div>
