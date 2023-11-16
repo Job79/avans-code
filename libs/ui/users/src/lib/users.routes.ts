@@ -1,10 +1,27 @@
 import { Route } from '@angular/router';
-import {UsersListComponent} from "./users-list/users-list.component";
+import {ListComponent} from "./list/list.component";
+import {DetailsComponent} from "./details/details.component";
+import {EditComponent} from "./edit/edit.component";
 
 export const userRoutes: Route[] = [
   {
     path: '',
     pathMatch: 'full',
-    component: UsersListComponent
+    component: ListComponent
+  },
+  {
+    path: 'create',
+    pathMatch: 'full',
+    component: EditComponent
+  },
+  {
+    path: ':id/edit',
+    pathMatch: 'full',
+    component: EditComponent
+  },
+  {
+    path: ':id',
+    pathMatch: 'full',
+    component: DetailsComponent
   }
 ];

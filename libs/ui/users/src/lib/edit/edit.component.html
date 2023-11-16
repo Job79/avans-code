@@ -1,0 +1,29 @@
+<form #userForm="ngForm" name="form" (ngSubmit)="userForm.form.valid && save()">
+  <div class="card-header">
+    <p class="card-title">
+      {{user.id ? 'Edit' : 'Create'}} User
+    </p>
+    <div>
+      <button *ngIf="user.id" class="btn btn-primary mx-1" (click)="delete()">
+        <fa-icon [icon]="icon.faTrashCan" class="mx-1"></fa-icon>
+        Delete
+      </button>
+
+      <button type="submit" class="btn btn-primary mx-1">
+        <fa-icon [icon]="icon.faFloppyDisk" class="mx-1"></fa-icon>
+        Save
+      </button>
+    </div>
+  </div>
+  <div class="card p-4">
+    <label class="text-gray-700 text-sm font-bold block mb-2" for="name">First Name</label>
+    <input
+      id="name"
+      name="name"
+      #name="ngModel"
+      [(ngModel)]="user.name"
+      class="block appearance-none text-gray-700 border border-red-800 rounded-lg py-1 px-2 focus:outline-none"
+      [ngClass]="{'border-red-500': name.touched && name.invalid}"
+      required>
+  </div>
+</form>

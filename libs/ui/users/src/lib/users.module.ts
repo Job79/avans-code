@@ -1,18 +1,27 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HttpClientModule} from "@angular/common/http";
-import {UsersListComponent} from "./users-list/users-list.component";
-import {provideRouter} from "@angular/router";
+import {ListComponent} from "./list/list.component";
+import {provideRouter, RouterLink} from "@angular/router";
 import {userRoutes} from "./users.routes";
 import {CardComponent} from "@avans-code/ui/common";
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {DetailsComponent} from "./details/details.component";
+import {EditComponent} from "./edit/edit.component";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
-  imports: [CommonModule, HttpClientModule, CardComponent],
-  declarations: [UsersListComponent],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    CardComponent,
+    FontAwesomeModule,
+    RouterLink,
+    ReactiveFormsModule,
+    FormsModule],
+  declarations: [ListComponent, DetailsComponent, EditComponent],
   providers: [provideRouter(userRoutes)],
-  exports: [
-    UsersListComponent
-  ]
+  exports: []
 })
 export class UsersModule {
 }

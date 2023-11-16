@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {faRightToBracket} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'avans-code-navbar',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styles: [],
 })
 export class NavbarComponent {
+  icon = {faRightToBracket: faRightToBracket}
   hidden = true
 }
