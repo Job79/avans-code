@@ -51,7 +51,7 @@ export class UserService {
     return of<User[]>(this.users)
   }
 
-  public User(id: string): Observable<User|null> {
+  public User(id: string): Observable<User> {
     const user = this.users.find(user => user.id === id)
     if (user) {
       return of<User>(user)
@@ -60,6 +60,7 @@ export class UserService {
   }
 
   public Create(user: User): Observable<User> {
+    user.id = (this.users.length + 1).toString()
     this.users.push(user)
     return of<User>(user)
   }

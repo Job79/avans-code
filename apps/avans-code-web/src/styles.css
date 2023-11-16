@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-gray-50;
-}
+/* Give body a gray background */
+body { @apply bg-gray-50 }
 
-.card {
-  @apply bg-white rounded-xl p-4 shadow-lg;
-}
+/* Cards styling */
+.card { @apply bg-white rounded-xl shadow-lg overflow-hidden }
+.card-header { @apply flex justify-between items-center h-16 mt-3 mx-1 }
+.card-title { @apply text-2xl font-bold }
 
-.card-title {
-  @apply text-2xl font-bold my-2;
-}
+/* Buttons styling */
+.btn { @apply px-4 py-2 bg-red-700 text-white rounded-lg shadow-md hover:bg-red-800 }
+
