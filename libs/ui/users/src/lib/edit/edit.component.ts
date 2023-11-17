@@ -20,6 +20,7 @@ export class EditComponent implements OnInit {
     name: '',
     email: '',
     password: '',
+    profileUrl: '',
     role: 'student'
   }
 
@@ -31,26 +32,26 @@ export class EditComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')!
     if (id) {
-      this.userService.User(id).subscribe((user) => this.user = {...user})
+      this.userService.user(id).subscribe((user) => this.user = {...user})
       return
     }
   }
 
   save() {
     if (this.user.id === '') {
-      this.userService.Create(this.user).subscribe(
+      this.userService.create(this.user).subscribe(
         () => window.history.back()
       )
       return
     }
 
-    this.userService.Update(this.user).subscribe(
+    this.userService.update(this.user).subscribe(
       () => window.history.back()
     )
   }
 
   delete() {
-    this.userService.Delete(this.user.id).subscribe(
+    this.userService.delete(this.user.id).subscribe(
       () => window.history.back()
     )
   }

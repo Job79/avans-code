@@ -9,15 +9,15 @@
 </div>
 <div class="card">
   <a
-    *ngFor="let user of users | async"
+    *ngFor="let user of users$ | async"
     routerLink="{{user.id}}"
     class="flex items-center justify-between border-b last:border-b-0 px-4 py-5 cursor-pointer hover:bg-gray-100">
     <div>
       {{user.name}}
     </div>
     <div>
-      <a class="btn btn-primary" routerLink="{{user.id}}/edit" (click)="$event.stopPropagation()">
-        <fa-icon [icon]="icon.faEdit"></fa-icon>
+      <a class="btn btn-secondary" routerLink="{{user.id}}/edit" (click)="$event.stopPropagation()">
+        <fa-icon [icon]="icon.faPencil"></fa-icon>
       </a>
     </div>
   </a>
