@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../service/UserService";
 import {User} from "@avans-code/shared/domain";
 import {Observable} from "rxjs";
-import {faEdit, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faPencil, faPlus} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'avans-code-list',
@@ -10,12 +10,12 @@ import {faEdit, faPlus} from "@fortawesome/free-solid-svg-icons";
   styleUrls: [],
 })
 export class ListComponent implements OnInit {
-  icon = { faPlus: faPlus, faEdit: faEdit }
-  users!: Observable<User[]>
+  icon = { faPlus: faPlus, faPencil: faPencil }
+  users$!: Observable<User[]>
 
   constructor(private readonly userService: UserService) {}
 
   ngOnInit(): void {
-    this.users = this.userService.Users()
+    this.users$ = this.userService.users()
   }
 }

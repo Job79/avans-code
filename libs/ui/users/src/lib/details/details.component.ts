@@ -10,7 +10,7 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: [],
 })
 export class DetailsComponent implements OnInit {
-  user!: Observable<User>
+  user$!: Observable<User>
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -19,6 +19,6 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')!
-    this.user = this.userService.User(id)
+    this.user$ = this.userService.user(id)
   }
 }

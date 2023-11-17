@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {HttpClientModule} from "@angular/common/http";
 import {ListComponent} from "./list/list.component";
 import {provideRouter, RouterLink} from "@angular/router";
@@ -18,7 +18,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     FontAwesomeModule,
     RouterLink,
     ReactiveFormsModule,
-    FormsModule],
+    FormsModule,
+    NgOptimizedImage
+  ],
   declarations: [ListComponent, DetailsComponent, EditComponent],
   providers: [provideRouter(userRoutes)],
   exports: []

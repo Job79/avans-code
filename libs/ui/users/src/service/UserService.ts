@@ -6,12 +6,13 @@ import {Observable, of, throwError} from "rxjs";
   {providedIn: 'root'}
 )
 export class UserService {
-  users: User[] = [
+  db: User[] = [
     {
       id: '1',
       name: 'John Doe',
       email: 'john.doe@gmail.com',
       password: '123456',
+      profileUrl: 'https://picsum.photos/id/1/200',
       role: 'admin'
     },
     {
@@ -19,6 +20,7 @@ export class UserService {
       name: 'Jane Doe',
       email: 'jane.doe@gmail.com',
       password: '123456',
+      profileUrl: 'https://picsum.photos/id/2/200',
       role: 'teacher'
     },
     {
@@ -26,6 +28,7 @@ export class UserService {
       name: 'John Dodo',
       email: 'john.dodo@gmail.com',
       password: '123456',
+      profileUrl: 'https://picsum.photos/id/3/200',
       role: 'student'
     },
     {
@@ -33,6 +36,7 @@ export class UserService {
       name: 'Jane Dodo',
       email: 'jane.dodo@gmail.com',
       password: '123456',
+      profileUrl: 'https://picsum.photos/id/4/200',
       role: 'student'
     },
     {
@@ -40,6 +44,7 @@ export class UserService {
       name: 'John Dedodo',
       email: 'john.dedodo@gmail.com',
       password: '123456',
+      profileUrl: 'https://picsum.photos/id/5/200',
       role: 'student'
     }
   ]
@@ -47,33 +52,33 @@ export class UserService {
   constructor() {
   }
 
-  public Users(): Observable<User[]> {
-    return of<User[]>(this.users)
+  public users(): Observable<User[]> {
+    return of<User[]>(this.db)
   }
 
-  public User(id: string): Observable<User> {
-    const user = this.users.find(user => user.id === id)
+  public user(id: string): Observable<User> {
+    const user = this.db.find(user => user.id === id)
     if (user) {
       return of<User>(user)
     }
     return throwError(() => new Error('User not found'))
   }
 
-  public Create(user: User): Observable<User> {
-    user.id = (this.users.length + 1).toString()
-    this.users.push(user)
+  public create(user: User): Observable<User> {
+    user.id = (this.db.length + 1).toString()
+    this.db.push(user)
     return of<User>(user)
   }
 
-  public Update(user: User): Observable<User> {
-    const idx = this.users.findIndex(u => u.id === user.id)
-    this.users[idx] = user
+  public update(user: User): Observable<User> {
+    const idx = this.db.findIndex(u => u.id === user.id)
+    this.db[idx] = user
     return of<User>(user)
   }
 
-  public Delete(id: string): Observable<boolean> {
-    const idx = this.users.findIndex(u => u.id === id)
-    this.users.splice(idx, 1)
+  public delete(id: string): Observable<boolean> {
+    const idx = this.db.findIndex(u => u.id === id)
+    this.db.splice(idx, 1)
     return of<boolean>(true)
   }
 }
