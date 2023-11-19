@@ -8,12 +8,23 @@
   </div>
 </div>
 <div class="card">
+  <div class="flex h-12 bg-gray-50 relative">
+    <input
+      class="outline-none bg-transparent w-full px-4"
+      placeholder="Search users..."
+      (input)="search()"
+      [(ngModel)]="query">
+    <fa-icon [icon]="icon.faSearch" class="text-lg absolute top-1/2 -translate-y-1/2 right-4"></fa-icon>
+  </div>
   <a
     *ngFor="let user of users$ | async"
     routerLink="{{user.id}}"
-    class="flex items-center justify-between border-b last:border-b-0 px-4 py-5 cursor-pointer hover:bg-gray-100">
-    <div>
+    class="row cursor-pointer hover:bg-gray-100">
+    <div class="flex items-center">
       {{user.name}}
+      <div class="ml-3 label">
+        {{user.role}}
+      </div>
     </div>
     <div>
       <a class="btn btn-secondary" routerLink="{{user.id}}/edit" (click)="$event.stopPropagation()">

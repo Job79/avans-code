@@ -81,4 +81,8 @@ export class UserService {
     this.db.splice(idx, 1)
     return of<boolean>(true)
   }
+
+  search(query: string) {
+    return of<User[]>(this.db.filter(user => user.name.toLowerCase().includes(query.toLowerCase())))
+  }
 }
