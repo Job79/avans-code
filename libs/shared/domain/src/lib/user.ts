@@ -1,4 +1,5 @@
-export type Role = 'admin' | 'teacher' | 'student';
+export const Roles = ['student', 'teacher', 'admin'] as const;
+export type Role = typeof Roles[number];
 
 export interface User {
   id: string;

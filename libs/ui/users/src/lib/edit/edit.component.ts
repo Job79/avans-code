@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from "@avans-code/shared/domain";
+import {User, Roles} from "@avans-code/shared/domain";
 import {ActivatedRoute} from "@angular/router";
 import {UserService} from "../../service/UserService";
 import {faFloppyDisk, faTrashCan} from "@fortawesome/free-solid-svg-icons";
@@ -13,6 +13,10 @@ export class EditComponent implements OnInit {
   icon = {
     faTrashCan: faTrashCan,
     faFloppyDisk: faFloppyDisk
+  }
+
+  options = {
+    roles: Roles
   }
 
   user: User = {

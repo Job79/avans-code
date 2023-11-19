@@ -11,7 +11,7 @@ export class UserService {
       id: '1',
       name: 'John Doe',
       email: 'john.doe@gmail.com',
-      password: '123456',
+      password: '12345678',
       profileUrl: 'https://picsum.photos/id/1/200',
       role: 'admin'
     },
@@ -19,7 +19,7 @@ export class UserService {
       id: '2',
       name: 'Jane Doe',
       email: 'jane.doe@gmail.com',
-      password: '123456',
+      password: '12345678',
       profileUrl: 'https://picsum.photos/id/2/200',
       role: 'teacher'
     },
@@ -27,7 +27,7 @@ export class UserService {
       id: '3',
       name: 'John Dodo',
       email: 'john.dodo@gmail.com',
-      password: '123456',
+      password: '12345678',
       profileUrl: 'https://picsum.photos/id/3/200',
       role: 'student'
     },
@@ -35,7 +35,7 @@ export class UserService {
       id: '4',
       name: 'Jane Dodo',
       email: 'jane.dodo@gmail.com',
-      password: '123456',
+      password: '12345678',
       profileUrl: 'https://picsum.photos/id/4/200',
       role: 'student'
     },
@@ -43,7 +43,7 @@ export class UserService {
       id: '5',
       name: 'John Dedodo',
       email: 'john.dedodo@gmail.com',
-      password: '123456',
+      password: '12345678',
       profileUrl: 'https://picsum.photos/id/5/200',
       role: 'student'
     }

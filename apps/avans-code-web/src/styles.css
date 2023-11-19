@@ -6,12 +6,17 @@
 body { @apply bg-gray-50 }
 
 /* Cards styling */
-.card { @apply bg-white rounded-xl shadow-lg overflow-hidden }
+.card { @apply bg-white border rounded-2xl shadow-xl overflow-hidden }
 .card-header { @apply flex justify-between items-center h-16 mt-3 mx-1 }
 .card-title { @apply text-2xl font-bold }
+.row { @apply flex items-center justify-between border-b last:border-b-0 px-5 py-5 }
+.label { @apply bg-red-700 text-white rounded-full px-1 text-[.7rem] h-min }
 
 /* Buttons styling */
 .btn { @apply px-4 py-2  text-white rounded-lg shadow-md }
 .btn-primary { @apply bg-red-700 hover:bg-red-800 }
 .btn-secondary { @apply bg-gray-600 hover:bg-gray-700 }
 
+/* Inputs */
+.input-text { @apply outline-none bg-gray-50 border border-gray-200 rounded-lg px-2 py-1 focus:border-gray-700 }
+.input-select { @apply input-text w-full max-w-[13.5rem] }
