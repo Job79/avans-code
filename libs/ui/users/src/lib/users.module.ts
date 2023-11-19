@@ -4,7 +4,6 @@ import {HttpClientModule} from "@angular/common/http";
 import {ListComponent} from "./list/list.component";
 import {provideRouter, RouterLink} from "@angular/router";
 import {userRoutes} from "./users.routes";
-import {CardComponent} from "@avans-code/ui/common";
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {DetailsComponent} from "./details/details.component";
 import {EditComponent} from "./edit/edit.component";
@@ -14,7 +13,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
   imports: [
     CommonModule,
     HttpClientModule,
-    CardComponent,
     FontAwesomeModule,
     RouterLink,
     ReactiveFormsModule,

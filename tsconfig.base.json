@@ -17,7 +17,6 @@
     "paths": {
       "@avans-code/backend/users": ["libs/backend/users/src/index.ts"],
       "@avans-code/shared/domain": ["libs/shared/domain/src/index.ts"],
-      "@avans-code/ui/common": ["libs/ui/common/src/index.ts"],
       "@avans-code/ui/features": ["libs/ui/features/src/index.ts"],
       "@avans-code/ui/layout": ["libs/ui/layout/src/index.ts"],
       "@avans-code/ui/users": ["libs/ui/users/src/index.ts"]
