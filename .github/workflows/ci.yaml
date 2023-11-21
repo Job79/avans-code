@@ -7,7 +7,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
@@ -24,19 +23,26 @@ jobs:
         run: |
           echo ${GITHUB_WORKSPACE}
           cd ${GITHUB_WORKSPACE}/dist/apps/avans-code-web/browser && zip ${GITHUB_WORKSPACE}/avans-code-web.zip ./* -r
+          cd ${GITHUB_WORKSPACE}/dist/apps/avans-code-api/ && zip ${GITHUB_WORKSPACE}/avans-code-api.zip ./* -r
 
-      - name: Upload artifact for deployment job
+      - name: Upload frontend artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: avans-code-web
           path: avans-code-web.zip
+
+      - name: Upload backend artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: avans-code-api
+          path: avans-code-api.zip
+
 
   deploy-frontend-app:
     runs-on: ubuntu-latest
     needs: build
     environment:
       name: 'Production'
-
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
@@ -55,3 +61,29 @@ jobs:
           skip_app_build: true
           action: "upload"
           app_location: "avans-code-web"
+
+  deploy-backend-api:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Production'
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: avans-code-api
+
+      - name: Unzip artifact
+        run: unzip avans-code-api.zip
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: 'Deploy to Azure'
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'avans-code'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.NEXTJS_PUBLISHPROFILE }}
+          package: .

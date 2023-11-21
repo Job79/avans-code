@@ -16,7 +16,8 @@
         "tsConfig": "apps/avans-code-api/tsconfig.app.json",
         "assets": ["apps/avans-code-api/src/assets"],
         "isolatedConfig": true,
-        "webpackConfig": "apps/avans-code-api/webpack.config.js"
+        "webpackConfig": "apps/avans-code-api/webpack.config.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {},
