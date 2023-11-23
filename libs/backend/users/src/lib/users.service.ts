@@ -36,7 +36,7 @@ export class UsersService {
   }
 
   async remove(id: string): Promise<User> {
-    const result = await this.userModel.findByIdAndRemove(ObjectId(id))
+    const result = await this.userModel.findByIdAndRemove(id)
     if (!result) {
       throw new Error('User not found');
     }

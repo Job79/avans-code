@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 
-import { AppService } from './app.service';
 import {UsersModule} from "@avans-code/backend/users";
 import {MongooseModule} from "@nestjs/mongoose";
 
@@ -10,6 +9,6 @@ import {MongooseModule} from "@nestjs/mongoose";
     UsersModule
   ],
   controllers: [],
-  providers: [AppService],
+  providers: [],
 })
 export class AppModule {}
