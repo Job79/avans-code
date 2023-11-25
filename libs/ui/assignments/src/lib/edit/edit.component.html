@@ -81,5 +81,12 @@
         <option *ngFor="let niveau of options.niveaus" [ngValue]="niveau">{{niveau}}</option>
       </select>
     </div>
+
+    <div class="row">
+      <p>Tags</p>
+      <select name="tags" class="input-select" multiple [(ngModel)]="assignment.tags">
+        <option *ngFor="let tag of options.tags" [ngValue]="tag">{{tag.name}}</option>
+      </select>
+    </div>
   </div>
 </form>

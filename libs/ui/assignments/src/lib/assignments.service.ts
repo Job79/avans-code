@@ -17,7 +17,7 @@ export class AssignmentsService {
         '        System.out.println("Hello, World!");\n' +
         '    }\n' +
         '}',
-      testCode: '',
+      testCode: '[todo]',
       version: 1,
       timestamp: new Date(),
       niveau: 'beginner',
@@ -42,7 +42,7 @@ export class AssignmentsService {
         '        System.out.println("Hello, World!");\n' +
         '    }\n' +
         '}',
-      testCode: '',
+      testCode: '[todo]',
       version: 1,
       timestamp: new Date(),
       niveau: 'beginner',
@@ -67,7 +67,7 @@ export class AssignmentsService {
         '        System.out.println("Hello, World!");\n' +
         '    }\n' +
         '}',
-      testCode: '',
+      testCode: '[todo]',
       version: 1,
       timestamp: new Date(),
       niveau: 'beginner',
@@ -92,7 +92,7 @@ export class AssignmentsService {
         '        System.out.println("Hello, World!");\n' +
         '    }\n' +
         '}',
-      testCode: '',
+      testCode: '[todo]',
       version: 1,
       timestamp: new Date(),
       niveau: 'intermediate',
@@ -117,7 +117,7 @@ export class AssignmentsService {
         '        System.out.println("Hello, World!");\n' +
         '    }\n' +
         '}',
-      testCode: '',
+      testCode: '[todo]',
       version: 2,
       timestamp: new Date(),
       niveau: 'intermediate',

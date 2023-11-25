@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Assignment, Niveaus} from "@avans-code/shared/domain";
+import {Assignment, Niveaus, Tag} from "@avans-code/shared/domain";
 import {ActivatedRoute} from "@angular/router";
 import {faFloppyDisk, faTrashCan} from "@fortawesome/free-solid-svg-icons";
 import {AssignmentsService} from "../assignments.service";
+import {TagsService} from "../tags.service";
 
 @Component({
   templateUrl: './edit.component.html',
@@ -13,8 +14,9 @@ export class EditComponent implements OnInit {
     faFloppyDisk: faFloppyDisk
   }
 
-  options = {
-    niveaus: Niveaus
+  options: {niveaus: typeof Niveaus, tags: Tag[]} = {
+    niveaus: Niveaus,
+    tags: []
   }
 
   assignment: Assignment = {
@@ -31,15 +33,22 @@ export class EditComponent implements OnInit {
 
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly assignmentService: AssignmentsService) {
+    private readonly assignmentService: AssignmentsService,
+    private readonly tagsService: TagsService) {
   }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')!
     if (id) {
       this.assignmentService.assignment(id).subscribe((assignment) => this.assignment = {...assignment})
-      return
     }
+
+    this.tagsService.tags().subscribe((tags) => {
+      this.options.tags = tags
+
+      // Use references from tags to show tags as selected
+      this.assignment.tags = this.assignment.tags.map(t => tags.find(tag => tag.name === t.name)!)
+    })
   }
 
   save() {
