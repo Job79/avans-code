@@ -19,7 +19,7 @@
   <a
     *ngFor="let user of users$ | async"
     routerLink="{{user.id}}"
-    class="row cursor-pointer hover:bg-gray-100">
+    class="row !py-5 cursor-pointer hover:bg-gray-100">
     <div class="flex items-center">
       {{user.name}}
       <div class="ml-3 label">

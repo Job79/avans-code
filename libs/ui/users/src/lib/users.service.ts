@@ -5,7 +5,7 @@ import {Observable, of, throwError} from "rxjs";
 @Injectable(
   {providedIn: 'root'}
 )
-export class UserService {
+export class UsersService {
   db: User[] = [
     {
       id: '1',
