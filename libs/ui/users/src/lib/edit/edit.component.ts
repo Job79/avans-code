@@ -1,13 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {User, Roles} from "@avans-code/shared/domain";
 import {ActivatedRoute} from "@angular/router";
-import {UserService} from "../../service/UserService";
+import {UsersService} from "../users.service";
 import {faFloppyDisk, faTrashCan} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: 'avans-code-edit',
   templateUrl: './edit.component.html',
-  styles: [],
 })
 export class EditComponent implements OnInit {
   icon = {
@@ -30,7 +28,7 @@ export class EditComponent implements OnInit {
 
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly userService: UserService) {
+    private readonly userService: UsersService) {
   }
 
   ngOnInit(): void {

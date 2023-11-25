@@ -1,13 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../../service/UserService";
+import {UsersService} from "../users.service";
 import {User} from "@avans-code/shared/domain";
 import {Observable} from "rxjs";
 import {faPencil, faPlus, faSearch} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: 'avans-code-list',
   templateUrl: './list.component.html',
-  styleUrls: [],
 })
 export class ListComponent implements OnInit {
   icon = {
@@ -18,7 +16,7 @@ export class ListComponent implements OnInit {
   users$!: Observable<User[]>
   query = ''
 
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UsersService) {}
 
   ngOnInit(): void {
     this.users$ = this.userService.users()
