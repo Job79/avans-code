@@ -1,0 +1,85 @@
+<form #assignmentForm="ngForm" name="form"
+      (ngSubmit)="assignmentForm.form.markAllAsTouched(); assignmentForm.form.valid && save()">
+  <div class="card-header">
+    <p class="card-title">{{assignment.id ? 'Edit' : 'Create'}} Assignment</p>
+    <div>
+      <button type="button" *ngIf="assignment.id" class="btn btn-primary mx-1" (click)="delete()">
+        <fa-icon [icon]="icon.faTrashCan" class="mx-1"></fa-icon>
+        Delete
+      </button>
+
+      <button type="submit" class="btn btn-primary mx-1">
+        <fa-icon [icon]="icon.faFloppyDisk" class="mx-1"></fa-icon>
+        Save
+      </button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="row">
+      <p>Name</p>
+      <input
+        name="name"
+        class="input-text"
+        #name="ngModel"
+        [ngClass]="{'!border-red-500': name.touched && name.invalid}"
+        [(ngModel)]="assignment.name"
+        minlength="2"
+        maxlength="64"
+        required>
+    </div>
+
+    <div class="row">
+      <p>Description</p>
+      <textarea
+        name="description"
+        class="input-textarea"
+        #description="ngModel"
+        [ngClass]="{'!border-red-500': description.touched && description.invalid}"
+        [(ngModel)]="assignment.description"
+        required>
+      </textarea>
+    </div>
+
+    <div class="row">
+      <p>Programming Language</p>
+      <input
+        name="programmingLanguage"
+        class="input-text"
+        #programmingLanguage="ngModel"
+        [ngClass]="{'!border-red-500': programmingLanguage.touched && programmingLanguage.invalid}"
+        [(ngModel)]="assignment.programmingLanguage"
+        required>
+    </div>
+
+    <div class="row">
+      <p>Code Template</p>
+      <textarea
+        name="templateCode"
+        class="input-textarea"
+        #templateCode="ngModel"
+        [ngClass]="{'!border-red-500': templateCode.touched && templateCode.invalid}"
+        [(ngModel)]="assignment.templateCode"
+        required>
+        </textarea>
+    </div>
+
+    <div class="row">
+      <p>Unit Tests</p>
+      <textarea
+        name="testCode"
+        class="input-textarea"
+        #testCode="ngModel"
+        [ngClass]="{'!border-red-500': testCode.touched && testCode.invalid}"
+        [(ngModel)]="assignment.testCode"
+        required>
+        </textarea>
+    </div>
+
+    <div class="row">
+      <p>Niveau</p>
+      <select name="role" class="input-select" [(ngModel)]="assignment.niveau">
+        <option *ngFor="let niveau of options.niveaus" [ngValue]="niveau">{{niveau}}</option>
+      </select>
+    </div>
+  </div>
+</form>

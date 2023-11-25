@@ -6,7 +6,7 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @NgModule({
-    imports: [CommonModule, HttpClientModule, RouterLink, FontAwesomeModule, RouterLinkActive],
+  imports: [CommonModule, HttpClientModule, RouterLink, FontAwesomeModule, RouterLinkActive],
   declarations: [NavbarComponent],
   providers: [],
   exports: [
