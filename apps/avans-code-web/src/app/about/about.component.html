@@ -16,10 +16,11 @@
 
   <b class="block mt-5">Opdrachten</b>
   <p>
-    Het systeem zal opdrachten bevatten. Deze worden in het systeem gezet door leraren of ouderejaars studenten. Deze
+    Het systeem bevat opdrachten, welke worden beheert kunnen worden door leraren of ouderejaars studenten. Deze
     opdrachten bevatten een naam, beschrijving, versie, programmeertaal, templateCode, testCode, tags en niveau. De tags
-    worden gebruikt om op de opdrachten te filteren, en deze bevatten bijvoorbeeld de naam van het vak. De versie zal
-    omhoog gaan bij elke aanpassing, zodat de gebruiker kan zien of een oplossing voor de laatste versie is gemaakt.
+    worden gebruikt om op de opdrachten te filteren, en deze bevatten bijvoorbeeld de naam van het bijhorende vak. De
+    versie van de opdracht zal omhoog gaan bij elke aanpassing, zodat een gebruiker kan zien of een oplossing voor de
+    laatste versie is gemaakt.
 
     Niet iedereen kan elke tag aan zijn opdracht toevoegen, ouderejaars studenten kunnen bijvoorbeeld niet de tags voor
     een vak toevoegen. Dit is om verwarring te voorkomen.
@@ -42,15 +43,33 @@
   <b class="block mt-5">Commentaar</b>
   <p>
     Nadat een student zijn oplossing heeft ingeleverd kan deze feedback geven aan andere studenten. Deze feedback zal
-    dan getoond worden onder de oplossing.
+    dan getoond worden onder de oplossing. Het is mogelijk om op een commentaar te reageren, zodat er een discussie
+    kan ontstaan.
   </p>
 
   <b class="block mt-5">Tag</b>
   <p>
-    Tags worden beheerd door de leraren. Deze kunnen nieuwe tags aanmaken en verwijderen. Een tag kan inactief zijn,
+    Tags worden beheerd door de admins. Deze kunnen nieuwe tags aanmaken en verwijderen. Een tag kan inactief zijn,
     deze kan dan niet meer worden toegevoegd aan nieuwe opdrachten, maar zal in het systeem blijven staan.
+  </p>
+
+  <b class="block mt-5">User Stories</b>
+  <p>
+    Voor het ontwikkelen van het systeem zijn de volgende user stories opgesteld:<br>
+    - Als gebruiker wil ik in kunnen loggen zodat ik geauthenticeerde acties kan uitvoeren<br>
+    - Als admin wil ik accounts kunnen beheren zodat ik mijn gebruikers in het systeem kan zetten<br>
+    - Als gebruiker wil ik oefeningen aan kunnen maken zodat ik deze beschikbaar kan stellen<br>
+    - Als gebruiker wil ik oefeningen kunnen beheren zodat ik deze later nog kan wijzigen of verwijderen<br>
+    - Als gebruiker wil ik oefeningen in kunnen zien zodat ik deze kan maken<br>
+    - Als gebruiker wil ik mijn oplossing toe kunnen voegen aan een oefening<br>
+    - Als gebruiker wil ik andere oplossingen in kunnen zien nadat ik zelf een oplossing heb toegevoegt<br>
+    - Als gebruiker wil ik comments kunnen plaatsen op andere oplossingen om zo feedback te geven<br>
+    - Als admin wil ik de tags in het systeem kunnen beheren<br>
   </p>
 
   <b class="block mt-5">Entity Relationship Diagram</b>
   <img src="/assets/erd.svg" alt="Entity Relationship Diagram">
+
+  <b class="block mt-5">MongoDB Collections</b>
+  <img src="/assets/db.svg" alt="MongoDB Collections">
 </div>
