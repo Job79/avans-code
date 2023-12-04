@@ -1,7 +1,11 @@
-import {Injectable, NotFoundException} from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
+import { User } from '@avans-code/backend/schemas';
+import {BadRequestException, Injectable, NotFoundException} from '@nestjs/common';
 import {InjectModel} from "@nestjs/mongoose";
-import {User} from "./schemas/user.schema";
 import {Model} from "mongoose";
+import {MongoServerError} from 'mongodb'
+import {CreateUserDto} from "./dto/createUserDto";
+import {UpdateUserDto} from "./dto/updateUserDto";
 
 @Injectable()
 export class UsersService {
@@ -9,30 +13,46 @@ export class UsersService {
   constructor(@InjectModel(User.name) private readonly userModel: Model<User>) {
   }
 
-  async create(user: User): Promise<User> {
-    const newMeal = new this.userModel(user);
-    return await newMeal.save();
-  }
-
   async findAll(): Promise<User[]> {
-    return await this.userModel.find().exec();
+    return await this.userModel.find().select("-password").exec();
   }
 
   async findOne(id: string): Promise<User> {
-    const user = await this.userModel.findById(id).exec()
+    const user = await this.userModel.findById(id).select("-password").exec()
     if (!user) {
       throw new NotFoundException('User not found');
     }
     return user
   }
 
-  async update(id: string, user: User): Promise<User> {
-    const result = await this.userModel.findByIdAndUpdate(id, user, {new: true});
-    if (!result) {
-      throw new NotFoundException('User not found');
+  async create(user: CreateUserDto): Promise<User> {
+    try {
+      const newUser = new this.userModel(user);
+      newUser.password = await bcrypt.hash(newUser.password, 10);
+      return await newUser.save();
+    } catch (err) {
+      if (err instanceof MongoServerError && err.code === 11000) {
+        throw new BadRequestException('Email already in use')
+      }
+      throw err
     }
+  }
 
-    return result;
+  async update(id: string, user: UpdateUserDto): Promise<User> {
+    user.password = await bcrypt.hash(user.password, 10);
+
+    try {
+      const existingUser = await this.userModel.findByIdAndUpdate(id, user).exec();
+      if (!existingUser) {
+        throw new NotFoundException('User not found');
+      }
+      return existingUser;
+    } catch (err) {
+      if (err instanceof MongoServerError && err.code === 11000) {
+        throw new BadRequestException('Email already in use')
+      }
+      throw err
+    }
   }
 
   async remove(id: string): Promise<User> {
@@ -40,7 +60,6 @@ export class UsersService {
     if (!result) {
       throw new NotFoundException('User not found');
     }
-
     return result;
   }
 }

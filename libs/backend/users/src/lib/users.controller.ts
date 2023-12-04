@@ -1,8 +1,11 @@
 import {Body, Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
 import {UsersService} from "./users.service";
-import {User} from "./schemas/user.schema";
+import {User} from "@avans-code/backend/schemas";
+import {CreateUserDto} from "./dto/createUserDto";
+import {Roles} from "@avans-code/backend/auth";
+import {UpdateUserDto} from "./dto/updateUserDto";
 
-@Controller()
+@Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -11,18 +14,24 @@ export class UsersController {
     return await this.usersService.findAll()
   }
 
+  @Get(':id')
+  async getOne(@Param('id') id: string) : Promise<User> {
+    return await this.usersService.findOne(id);
+  }
+
   @Post()
-  async create(@Body() newUser: User) : Promise<User> {
-    return await this.usersService.create(newUser);
+  @Roles('admin')
+  async create(@Body() user: CreateUserDto) : Promise<User> {
+    return await this.usersService.create(user);
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() updatedUser: User) : Promise<User> {
-    return await this.usersService.update(id, updatedUser);
+  async update(@Param('id') id: string, @Body() user: UpdateUserDto) : Promise<User> {
+    return await this.usersService.update(id, user);
   }
 
-
   @Delete(':id')
+  @Roles('admin')
   async remove(@Param('id') id: string) : Promise<User> {
     return await this.usersService.remove(id);
   }
