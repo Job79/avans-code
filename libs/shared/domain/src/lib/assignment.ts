@@ -1,17 +1,21 @@
-import {User} from "./user";
-import {Niveau} from "./niveau";
-import {Tag} from "./tag";
+import {IUser} from "./user";
+import {INiveau} from "./niveau";
+import {ITag} from "./tag";
 
-export interface Assignment {
-  id: string;
+export interface IAssignment {
+  _id: string;
   name: string;
   description: string;
+  isPublic: boolean;
   version: number;
   programmingLanguage: string;
   templateCode: string;
   testCode: string;
   timestamp?: Date;
-  niveau: Niveau;
-  tags: Tag[];
-  owner?: Pick<User, 'id' | 'name'>;
+  niveau: INiveau;
+  tags: ITag[];
+  owner?: Pick<IUser, '_id' | 'name'>;
 }
+
+export type ICreateAssignment = Pick<IAssignment, 'name' | 'description' | 'isPublic' | 'programmingLanguage' | 'templateCode' | 'testCode' | 'niveau' | 'tags'>;
+export type IUpdateAssignment = Pick<IAssignment, 'name' | 'description' | 'isPublic' | 'programmingLanguage' | 'templateCode' | 'testCode' | 'niveau' | 'tags'>;
