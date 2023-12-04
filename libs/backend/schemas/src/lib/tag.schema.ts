@@ -8,8 +8,11 @@ export type TagDocument = HydratedDocument<Tag>;
 export class Tag implements ITag {
     id!: string
 
-    @Prop({required: true})
+    @Prop({required: true, unique: true})
     name!: string;
+
+    @Prop({required: true})
+    category!: string;
 
     @Prop({required: true})
     isActive!: boolean;

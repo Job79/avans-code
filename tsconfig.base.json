@@ -15,9 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@avans-code/backend/assignments": ["libs/backend/assignments/src/index.ts"],
+      "@avans-code/backend/assignments": [
+        "libs/backend/assignments/src/index.ts"
+      ],
       "@avans-code/backend/auth": ["libs/backend/auth/src/index.ts"],
       "@avans-code/backend/schemas": ["libs/backend/schemas/src/index.ts"],
+      "@avans-code/backend/tags": ["libs/backend/tags/src/index.ts"],
       "@avans-code/backend/users": ["libs/backend/users/src/index.ts"],
       "@avans-code/shared/domain": ["libs/shared/domain/src/index.ts"],
       "@avans-code/ui/assignments": ["libs/ui/assignments/src/index.ts"],
