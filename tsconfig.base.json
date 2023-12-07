@@ -19,6 +19,9 @@
         "libs/backend/assignments/src/index.ts"
       ],
       "@avans-code/backend/auth": ["libs/backend/auth/src/index.ts"],
+      "@avans-code/backend/recommendations": [
+        "libs/backend/recommendations/src/index.ts"
+      ],
       "@avans-code/backend/schemas": ["libs/backend/schemas/src/index.ts"],
       "@avans-code/backend/tags": ["libs/backend/tags/src/index.ts"],
       "@avans-code/backend/users": ["libs/backend/users/src/index.ts"],
