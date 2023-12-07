@@ -3,7 +3,8 @@ import {UsersModule} from "@avans-code/backend/users";
 import {MongooseModule} from "@nestjs/mongoose";
 import {AuthModule} from "@avans-code/backend/auth";
 import {AssignmentsModule} from "@avans-code/backend/assignments";
-import {TagsModule} from "../../../../libs/backend/tags/src/lib/tags.module";
+import {TagsModule} from "@avans-code/backend/tags";
+import {RecommendationsModule} from "@avans-code/backend/recommendations";
 
 @Module({
   imports: [
@@ -11,7 +12,8 @@ import {TagsModule} from "../../../../libs/backend/tags/src/lib/tags.module";
     UsersModule,
     AuthModule,
     AssignmentsModule,
-    TagsModule
+    TagsModule,
+    RecommendationsModule
   ],
   controllers: [],
   providers: [],

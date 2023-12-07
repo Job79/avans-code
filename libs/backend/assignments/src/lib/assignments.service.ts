@@ -33,7 +33,7 @@ export class AssignmentsService {
             throw new NotFoundException(`Given tags not found: ${notFoundTags.map(({name}) => name).join(', ')}`)
         }
 
-        const owner = await this.userModel.findById(user._id).exec();
+        const owner = await this.userModel.findById(user.id).exec();
         if (!owner) {
             throw new NotFoundException('Owner not found');
         }
@@ -54,7 +54,7 @@ export class AssignmentsService {
 
     async update(id: string, user: AuthUser, assignment: UpdateAssignmentDto): Promise<Assignment> {
         const existingAssignment = await this.assignmentModel.findById(id);
-        if (!existingAssignment || (user.role !== 'admin' && existingAssignment.owner._id !== user._id)) {
+        if (!existingAssignment || (user.role !== 'admin' && existingAssignment.owner._id.toString() !== user.id)) {
             throw new NotFoundException('Assignment not found');
         }
 

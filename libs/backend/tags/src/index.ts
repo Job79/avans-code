@@ -1,1 +1,1 @@
-export * from './lib/tags-backend.module';
+export * from './lib/tags.module';

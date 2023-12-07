@@ -2,7 +2,7 @@ import {Body, Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
 import {AssignmentsService} from "./assignments.service";
 import {Assignment} from "@avans-code/backend/schemas";
 import {CreateAssignmentDto} from "./dto/createAssignmentDto";
-import {AuthUser, Roles, User} from "@avans-code/backend/auth";
+import {AuthUser, User} from "@avans-code/backend/auth";
 import {UpdateAssignmentDto} from "./dto/updateAssignmentDto";
 
 @Controller('assignments')
@@ -20,7 +20,6 @@ export class AssignmentsController {
   }
 
   @Post()
-  @Roles('admin')
   async create(@Body() assignment: CreateAssignmentDto, @User() user : AuthUser) : Promise<Assignment> {
     return await this.assignmentsService.create(user, assignment);
   }
@@ -31,7 +30,6 @@ export class AssignmentsController {
   }
 
   @Delete(':id')
-  @Roles('admin')
   async remove(@Param('id') id: string) : Promise<Assignment> {
     return await this.assignmentsService.remove(id);
   }
