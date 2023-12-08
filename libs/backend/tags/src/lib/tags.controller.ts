@@ -7,7 +7,8 @@ import {UpdateTagDto} from "./dto/updateTagDto";
 
 @Controller('tags')
 export class TagsController {
-  constructor(private readonly tagsService: TagsService) {}
+  constructor(private tagsService: TagsService) {
+  }
 
   @Get()
   async getData() {
@@ -15,24 +16,25 @@ export class TagsController {
   }
 
   @Get(':id')
-  async getOne(@Param('id') id: string) : Promise<Tag> {
+  async getOne(@Param('id') id: string): Promise<Tag> {
     return await this.tagsService.findOne(id);
   }
 
   @Post()
   @Roles('admin')
-  async create(@Body() tag: CreateTagDto) : Promise<Tag> {
+  async create(@Body() tag: CreateTagDto): Promise<Tag> {
     return await this.tagsService.create(tag);
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() tag: UpdateTagDto) : Promise<Tag> {
+  @Roles('admin')
+  async update(@Param('id') id: string, @Body() tag: UpdateTagDto): Promise<Tag> {
     return await this.tagsService.update(id, tag);
   }
 
   @Delete(':id')
   @Roles('admin')
-  async remove(@Param('id') id: string) : Promise<Tag> {
+  async remove(@Param('id') id: string): Promise<Tag> {
     return await this.tagsService.remove(id);
   }
 }

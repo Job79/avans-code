@@ -1,5 +1,5 @@
 import * as bcrypt from 'bcrypt';
-import { User } from '@avans-code/backend/schemas';
+import {User, UserDocument} from '@avans-code/backend/schemas';
 import {BadRequestException, Injectable, NotFoundException} from '@nestjs/common';
 import {InjectModel} from "@nestjs/mongoose";
 import {Model} from "mongoose";
@@ -10,22 +10,22 @@ import {UpdateUserDto} from "./dto/updateUserDto";
 @Injectable()
 export class UsersService {
 
-  constructor(@InjectModel(User.name) private readonly userModel: Model<User>) {
+  constructor(@InjectModel(User.name) private userModel: Model<User>) {
   }
 
-  async findAll(): Promise<User[]> {
-    return await this.userModel.find().select("-password").exec();
+  async findAll(): Promise<UserDocument[]> {
+    return await this.userModel.find().exec();
   }
 
-  async findOne(id: string): Promise<User> {
-    const user = await this.userModel.findById(id).select("-password").exec()
+  async findOne(id: string): Promise<UserDocument> {
+    const user = await this.userModel.findById(id).exec()
     if (!user) {
       throw new NotFoundException('User not found');
     }
     return user
   }
 
-  async create(user: CreateUserDto): Promise<User> {
+  async create(user: CreateUserDto): Promise<UserDocument> {
     try {
       const newUser = new this.userModel(user);
       newUser.password = await bcrypt.hash(newUser.password, 10);
@@ -38,7 +38,7 @@ export class UsersService {
     }
   }
 
-  async update(id: string, user: UpdateUserDto): Promise<User> {
+  async update(id: string, user: UpdateUserDto): Promise<UserDocument> {
     user.password = await bcrypt.hash(user.password, 10);
 
     try {
@@ -55,7 +55,7 @@ export class UsersService {
     }
   }
 
-  async remove(id: string): Promise<User> {
+  async remove(id: string): Promise<UserDocument> {
     const result = await this.userModel.findByIdAndDelete(id)
     if (!result) {
       throw new NotFoundException('User not found');

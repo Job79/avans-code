@@ -2,6 +2,7 @@ import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
 import {HydratedDocument, Schema as S} from 'mongoose';
 import {IAssignment, INiveau, IUser, ITag} from "@avans-code/shared/domain";
 import {TagSchema} from "./tag.schema";
+import {Solution, SolutionSchema} from "./solution.schema";
 
 export type AssignmentDocument = HydratedDocument<Assignment>;
 
@@ -21,7 +22,7 @@ export class Assignment implements IAssignment {
     @Prop({type: String, required: true})
     niveau!: INiveau;
 
-    @Prop({type: {id: S.Types.ObjectId, name: String}, required: true})
+    @Prop({type: {_id: S.Types.ObjectId, name: String}, required: true})
     owner!: Pick<IUser, "_id" | "name">;
 
     @Prop({required: true})
@@ -44,3 +45,7 @@ export class Assignment implements IAssignment {
 }
 
 export const AssignmentSchema = SchemaFactory.createForClass(Assignment);
+
+export const OnAssignmentDeleteHooks: ((doc: Assignment) => Promise<void>)[] = [];
+AssignmentSchema.post('deleteOne', (doc) => { OnAssignmentDeleteHooks.map(hook => hook(doc)) })
+

@@ -12,7 +12,7 @@ export class Comment implements IComment {
   @Prop({required: true})
   timestamp!: Date;
 
-  @Prop({type: {id: S.Types.ObjectId, name: String}, required: true})
+  @Prop({type: {_id: S.Types.ObjectId, name: String}, required: true})
   owner!: Pick<IUser, "_id" | "name">;
 }
 

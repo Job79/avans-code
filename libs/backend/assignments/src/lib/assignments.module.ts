@@ -14,18 +14,18 @@ import {
 } from "@avans-code/backend/schemas";
 import {SolutionsController} from "./solutions.controller";
 import {SolutionsService} from "./solutions.service";
-import {RecommendationsModule} from "@avans-code/backend/recommendations";
+import {CommentsController} from "./comments.controller";
+import {CommentsService} from "./comments.service";
 
 @Module({
   imports: [
     MongooseModule.forFeature([{name: Assignment.name, schema: AssignmentSchema}]),
     MongooseModule.forFeature([{name: Solution.name, schema: SolutionSchema}]),
     MongooseModule.forFeature([{name: Tag.name, schema: TagSchema}]),
-    MongooseModule.forFeature([{name: User.name, schema: UserSchema}]),
-    RecommendationsModule
+    MongooseModule.forFeature([{name: User.name, schema: UserSchema}])
   ],
-  controllers: [SolutionsController, AssignmentsController],
-  providers: [SolutionsService, AssignmentsService],
+  controllers: [SolutionsController, AssignmentsController, CommentsController],
+  providers: [SolutionsService, AssignmentsService, CommentsService],
   exports: [],
 })
 export class AssignmentsModule {

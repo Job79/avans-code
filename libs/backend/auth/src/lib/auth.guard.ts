@@ -6,10 +6,10 @@ import {IS_PUBLIC} from "./decorators/public.decorator";
 import {ROLES} from "./decorators/role.decorator";
 import {IRole} from "@avans-code/shared/domain";
 
-
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private jwtService: JwtService, private reflector: Reflector) {
+  constructor(private jwtService: JwtService,
+              private reflector: Reflector) {
   }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {

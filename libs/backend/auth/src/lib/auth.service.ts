@@ -8,13 +8,13 @@ import {Model} from "mongoose";
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectModel(User.name) private readonly userModel: Model<User>,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    @InjectModel(User.name) private userModel: Model<User>
   ) {
   }
 
   async signIn(email: string, password: string) {
-    const user = await this.userModel.findOne({email}).exec();
+    const user = await this.userModel.findOne({email}).select('+password').exec();
     if (!user || !await bcrypt.compare(password, user.password)) {
       throw new UnauthorizedException();
     }

@@ -1,4 +1,4 @@
-import { Tag } from '@avans-code/backend/schemas';
+import {Tag, TagDocument} from '@avans-code/backend/schemas';
 import {BadRequestException, Injectable, NotFoundException} from '@nestjs/common';
 import {InjectModel} from "@nestjs/mongoose";
 import {Model} from "mongoose";
@@ -9,14 +9,14 @@ import {UpdateTagDto} from "./dto/updateTagDto";
 @Injectable()
 export class TagsService {
 
-  constructor(@InjectModel(Tag.name) private readonly tagModel: Model<Tag>) {
+  constructor(@InjectModel(Tag.name) private tagModel: Model<Tag>) {
   }
 
-  async findAll(): Promise<Tag[]> {
+  async findAll(): Promise<TagDocument[]> {
     return await this.tagModel.find().exec();
   }
 
-  async findOne(id: string): Promise<Tag> {
+  async findOne(id: string): Promise<TagDocument> {
     const tag = await this.tagModel.findById(id).exec()
     if (!tag) {
       throw new NotFoundException('Tag not found');
@@ -24,7 +24,7 @@ export class TagsService {
     return tag
   }
 
-  async create(tag: CreateTagDto): Promise<Tag> {
+  async create(tag: CreateTagDto): Promise<TagDocument> {
     try {
       const newTag = new this.tagModel(tag);
       return await newTag.save();
@@ -36,7 +36,7 @@ export class TagsService {
     }
   }
 
-  async update(id: string, tag: UpdateTagDto): Promise<Tag> {
+  async update(id: string, tag: UpdateTagDto): Promise<TagDocument> {
     try {
       const existingTag = await this.tagModel.findByIdAndUpdate(id, tag).exec();
       if (!existingTag) {
@@ -51,7 +51,7 @@ export class TagsService {
     }
   }
 
-  async remove(id: string): Promise<Tag> {
+  async remove(id: string): Promise<TagDocument> {
     const result = await this.tagModel.findByIdAndDelete(id)
     if (!result) {
       throw new NotFoundException('Tag not found');

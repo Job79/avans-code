@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import {HydratedDocument} from 'mongoose';
 import {IRole, IUser} from "@avans-code/shared/domain";
+import {Assignment, AssignmentSchema} from "./assignment.schema";
 
 export type UserDocument = HydratedDocument<User>;
 
@@ -14,7 +15,7 @@ export class User implements IUser {
   @Prop({required: true, unique: true})
   email!: string;
 
-  @Prop({required: true})
+  @Prop({required: true, select: false})
   password!: string;
 
   @Prop({required: true})
@@ -25,3 +26,6 @@ export class User implements IUser {
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
+
+export const OnUserDeleteHooks: ((doc: User) => Promise<void>)[] = [];
+UserSchema.post('deleteOne', (doc) => { OnUserDeleteHooks.map(hook => hook(doc)) })
