@@ -1,14 +1,14 @@
 import {Injectable} from "@angular/core";
-import {User} from "@avans-code/shared/domain";
+import {IUser} from "@avans-code/shared/domain";
 import {Observable, of, throwError} from "rxjs";
 
 @Injectable(
   {providedIn: 'root'}
 )
 export class UsersService {
-  db: User[] = [
+  db: IUser[] = [
     {
-      id: '1',
+      _id: '1',
       name: 'John Doe',
       email: 'john.doe@gmail.com',
       password: '12345678',
@@ -16,7 +16,7 @@ export class UsersService {
       role: 'admin'
     },
     {
-      id: '2',
+      _id: '2',
       name: 'Jane Doe',
       email: 'jane.doe@gmail.com',
       password: '12345678',
@@ -24,7 +24,7 @@ export class UsersService {
       role: 'teacher'
     },
     {
-      id: '3',
+      _id: '3',
       name: 'John Dodo',
       email: 'john.dodo@gmail.com',
       password: '12345678',
@@ -32,7 +32,7 @@ export class UsersService {
       role: 'student'
     },
     {
-      id: '4',
+      _id: '4',
       name: 'Jane Dodo',
       email: 'jane.dodo@gmail.com',
       password: '12345678',
@@ -40,7 +40,7 @@ export class UsersService {
       role: 'student'
     },
     {
-      id: '5',
+      _id: '5',
       name: 'John Dedodo',
       email: 'john.dedodo@gmail.com',
       password: '12345678',
@@ -52,37 +52,37 @@ export class UsersService {
   constructor() {
   }
 
-  public users(): Observable<User[]> {
-    return of<User[]>(this.db)
+  public users(): Observable<IUser[]> {
+    return of<IUser[]>(this.db)
   }
 
-  public user(id: string): Observable<User> {
-    const user = this.db.find(user => user.id === id)
+  public user(id: string): Observable<IUser> {
+    const user = this.db.find(user => user._id === id)
     if (user) {
-      return of<User>(user)
+      return of<IUser>(user)
     }
     return throwError(() => new Error('User not found'))
   }
 
-  public create(user: User): Observable<User> {
-    user.id = (this.db.length + 1).toString()
+  public create(user: IUser): Observable<IUser> {
+    user._id = (this.db.length + 1).toString()
     this.db.push(user)
-    return of<User>(user)
+    return of<IUser>(user)
   }
 
-  public update(user: User): Observable<User> {
-    const idx = this.db.findIndex(u => u.id === user.id)
+  public update(user: IUser): Observable<IUser> {
+    const idx = this.db.findIndex(u => u._id === user._id)
     this.db[idx] = user
-    return of<User>(user)
+    return of<IUser>(user)
   }
 
   public delete(id: string): Observable<boolean> {
-    const idx = this.db.findIndex(u => u.id === id)
+    const idx = this.db.findIndex(u => u._id === id)
     this.db.splice(idx, 1)
     return of<boolean>(true)
   }
 
   search(query: string) {
-    return of<User[]>(this.db.filter(user => user.name.toLowerCase().includes(query.toLowerCase())))
+    return of<IUser[]>(this.db.filter(user => user.name.toLowerCase().includes(query.toLowerCase())))
   }
 }

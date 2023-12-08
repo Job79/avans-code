@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UsersService} from "../users.service";
-import {User} from "@avans-code/shared/domain";
+import {IUser} from "@avans-code/shared/domain";
 import {Observable} from "rxjs";
 import {faPencil, faPlus, faSearch} from "@fortawesome/free-solid-svg-icons";
 
@@ -13,7 +13,7 @@ export class ListComponent implements OnInit {
     faPencil: faPencil,
     faSearch: faSearch
   }
-  users$!: Observable<User[]>
+  users$!: Observable<IUser[]>
   query = ''
 
   constructor(private readonly userService: UsersService) {}

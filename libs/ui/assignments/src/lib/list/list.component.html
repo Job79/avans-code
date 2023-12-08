@@ -18,7 +18,7 @@
   </div>
   <a
     *ngFor="let assignment of assignments$ | async"
-    routerLink="{{assignment.id}}"
+    routerLink="{{assignment._id}}"
     class="row !py-5 cursor-pointer hover:bg-gray-100">
     <div class="flex items-center">
       {{assignment.name}}
@@ -30,7 +30,7 @@
       </div>
     </div>
     <div>
-      <a class="btn btn-secondary" routerLink="{{assignment.id}}/edit" (click)="$event.stopPropagation()">
+      <a class="btn btn-secondary" routerLink="{{assignment._id}}/edit" (click)="$event.stopPropagation()">
         <fa-icon [icon]="icon.faPencil"></fa-icon>
       </a>
     </div>

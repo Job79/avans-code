@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Assignment, Niveaus, Tag} from "@avans-code/shared/domain";
 import {ActivatedRoute} from "@angular/router";
 import {faFloppyDisk, faTrashCan} from "@fortawesome/free-solid-svg-icons";
 import {AssignmentsService} from "../assignments.service";
 import {TagsService} from "../tags.service";
+import {IAssignment, Niveaus, ITag} from "@avans-code/shared/domain";
 
 @Component({
   templateUrl: './edit.component.html',
@@ -14,15 +14,16 @@ export class EditComponent implements OnInit {
     faFloppyDisk: faFloppyDisk
   }
 
-  options: {niveaus: typeof Niveaus, tags: Tag[]} = {
+  options: {niveaus: typeof Niveaus, tags: ITag[]} = {
     niveaus: Niveaus,
     tags: []
   }
 
-  assignment: Assignment = {
-    id: "",
+  assignment: IAssignment = {
+    _id: "",
     name: "",
     description: "",
+    isPublic: false,
     niveau: 'beginner',
     programmingLanguage: "",
     tags: [],
@@ -52,7 +53,7 @@ export class EditComponent implements OnInit {
   }
 
   save() {
-    if (this.assignment.id === '') {
+    if (this.assignment._id === '') {
       this.assignmentService.create(this.assignment).subscribe(
         () => window.history.back()
       )
@@ -65,7 +66,7 @@ export class EditComponent implements OnInit {
   }
 
   delete() {
-    this.assignmentService.delete(this.assignment.id).subscribe(
+    this.assignmentService.delete(this.assignment._id).subscribe(
       () => window.history.back()
     )
   }

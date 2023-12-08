@@ -1,8 +1,8 @@
 <form #userForm="ngForm" name="form" (ngSubmit)="userForm.form.markAllAsTouched(); userForm.form.valid && save()">
   <div class="card-header">
-    <p class="card-title">{{user.id ? 'Edit' : 'Create'}} User</p>
+    <p class="card-title">{{user._id ? 'Edit' : 'Create'}} User</p>
     <div>
-      <button type="button" *ngIf="user.id" class="btn btn-primary mx-1" (click)="delete()">
+      <button type="button" *ngIf="user._id" class="btn btn-primary mx-1" (click)="delete()">
         <fa-icon [icon]="icon.faTrashCan" class="mx-1"></fa-icon>
         Delete
       </button>

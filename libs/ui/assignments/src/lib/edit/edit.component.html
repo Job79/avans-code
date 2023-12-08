@@ -1,9 +1,9 @@
 <form #assignmentForm="ngForm" name="form"
       (ngSubmit)="assignmentForm.form.markAllAsTouched(); assignmentForm.form.valid && save()">
   <div class="card-header">
-    <p class="card-title">{{assignment.id ? 'Edit' : 'Create'}} Assignment</p>
+    <p class="card-title">{{assignment._id ? 'Edit' : 'Create'}} Assignment</p>
     <div>
-      <button type="button" *ngIf="assignment.id" class="btn btn-primary mx-1" (click)="delete()">
+      <button type="button" *ngIf="assignment._id" class="btn btn-primary mx-1" (click)="delete()">
         <fa-icon [icon]="icon.faTrashCan" class="mx-1"></fa-icon>
         Delete
       </button>

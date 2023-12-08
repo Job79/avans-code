@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {User, Roles} from "@avans-code/shared/domain";
+import {IUser, Roles} from "@avans-code/shared/domain";
 import {ActivatedRoute} from "@angular/router";
 import {UsersService} from "../users.service";
 import {faFloppyDisk, faTrashCan} from "@fortawesome/free-solid-svg-icons";
@@ -17,8 +17,8 @@ export class EditComponent implements OnInit {
     roles: Roles
   }
 
-  user: User = {
-    id: '',
+  user: IUser = {
+    _id: '',
     name: '',
     email: '',
     password: '',
@@ -39,7 +39,7 @@ export class EditComponent implements OnInit {
   }
 
   save() {
-    if (this.user.id === '') {
+    if (this.user._id === '') {
       this.userService.create(this.user).subscribe(
         () => window.history.back()
       )
@@ -52,7 +52,7 @@ export class EditComponent implements OnInit {
   }
 
   delete() {
-    this.userService.delete(this.user.id).subscribe(
+    this.userService.delete(this.user._id).subscribe(
       () => window.history.back()
     )
   }

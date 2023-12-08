@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
-import {User} from "@avans-code/shared/domain";
+import {IUser} from "@avans-code/shared/domain";
 import {UsersService} from "../users.service";
 import {ActivatedRoute} from "@angular/router";
 
@@ -8,7 +8,7 @@ import {ActivatedRoute} from "@angular/router";
   templateUrl: './details.component.html',
 })
 export class DetailsComponent implements OnInit {
-  user$!: Observable<User>
+  user$!: Observable<IUser>
 
   constructor(
     private readonly route: ActivatedRoute,

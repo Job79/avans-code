@@ -18,7 +18,7 @@
   </div>
   <a
     *ngFor="let user of users$ | async"
-    routerLink="{{user.id}}"
+    routerLink="{{user._id}}"
     class="row !py-5 cursor-pointer hover:bg-gray-100">
     <div class="flex items-center">
       {{user.name}}
@@ -27,7 +27,7 @@
       </div>
     </div>
     <div>
-      <a class="btn btn-secondary" routerLink="{{user.id}}/edit" (click)="$event.stopPropagation()">
+      <a class="btn btn-secondary" routerLink="{{user._id}}/edit" (click)="$event.stopPropagation()">
         <fa-icon [icon]="icon.faPencil"></fa-icon>
       </a>
     </div>

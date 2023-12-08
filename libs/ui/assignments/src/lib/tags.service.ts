@@ -1,51 +1,26 @@
 import {Injectable} from "@angular/core";
-import { Tag } from "@avans-code/shared/domain";
+import { ITag } from "@avans-code/shared/domain";
 import {Observable, of} from "rxjs";
 
 @Injectable(
   {providedIn: 'root'}
 )
 export class TagsService {
-  db: Tag[] = [
-    {
-      name: 'Programming 1',
-      active: true
-    },
-    {
-      name: 'Programming 2',
-      active: true
-    },
-    {
-      name: 'Programming 3',
-      active: true
-    },
-    {
-      name: 'Datastructures 1',
-      active: true
-    },
-    {
-      name: 'Datastructures 2',
-      active: true
-    },
-    {
-      name: 'Racket programming 1',
-      active: false
-    }
-  ]
+  db: ITag[] = []
 
-  public tags(): Observable<Tag[]> {
-    return of<Tag[]>(this.db)
+  public tags(): Observable<ITag[]> {
+    return of<ITag[]>(this.db)
   }
 
-  public create(tag: Tag): Observable<Tag> {
+  public create(tag: ITag): Observable<ITag> {
     this.db.push(tag)
-    return of<Tag>(tag)
+    return of<ITag>(tag)
   }
 
-  public update(tag: Tag): Observable<Tag> {
+  public update(tag: ITag): Observable<ITag> {
     const idx = this.db.findIndex(u => u.name === tag.name)
     this.db[idx] = tag
-    return of<Tag>(tag)
+    return of<ITag>(tag)
   }
 
   public delete(name: string): Observable<boolean> {
@@ -54,7 +29,7 @@ export class TagsService {
     return of<boolean>(true)
   }
 
-  public query(name: string): Observable<Tag[]> {
-    return of<Tag[]>(this.db.filter(u => u.name.toLowerCase().includes(name.toLowerCase())))
+  public query(name: string): Observable<ITag[]> {
+    return of<ITag[]>(this.db.filter(u => u.name.toLowerCase().includes(name.toLowerCase())))
   }
 }

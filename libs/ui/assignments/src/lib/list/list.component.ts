@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AssignmentsService} from "../assignments.service";
-import {Assignment} from "@avans-code/shared/domain";
 import {Observable} from "rxjs";
 import {faPencil, faPlus, faSearch} from "@fortawesome/free-solid-svg-icons";
+import {IAssignment} from "@avans-code/shared/domain";
 
 @Component({
   templateUrl: './list.component.html'
@@ -13,7 +13,7 @@ export class ListComponent implements OnInit {
     faPencil: faPencil,
     faSearch: faSearch
   }
-  assignments$!: Observable<Assignment[]>
+  assignments$!: Observable<IAssignment[]>
   query = ''
 
   constructor(private readonly assignmentService: AssignmentsService) {}
