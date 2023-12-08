@@ -3,11 +3,9 @@ import {Neo4jModule, Neo4jScheme} from 'nest-neo4j';
 import {RecommendationsService} from "./recommendations.service";
 import {Neo4jConnection} from "nest-neo4j/dist";
 import {
-  AssignmentSchema, OnAssignmentDeleteHooks,
+  OnAssignmentDeleteHooks,
   OnSolutionCreateHooks,
   OnSolutionDeleteHooks, OnUserDeleteHooks,
-  SolutionSchema,
-  UserSchema
 } from "@avans-code/backend/schemas";
 import {RecommendationsController} from "./recommendations.controller";
 
