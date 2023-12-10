@@ -6,7 +6,7 @@ export const appRoutes: Route[] = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'users'
+    redirectTo: 'assignments'
   },
   {
     path: 'about',
