@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  NotFoundException,
   Param,
   Post,
   Put,
@@ -39,7 +38,7 @@ export class SolutionsController {
   @Put(':id')
   async update(@Param('assignmentId') assignmentId: string, @Param('id') id: string, @Body() newSolution: UpdateSolutionDto, @User() user: AuthUser): Promise<Solution> {
     const solution = await this.solutionsService.findByAssignmentIdAndId(assignmentId, id);
-    if (user.role !== 'admin' && solution.owner._id !== user.id) {
+    if (user.role !== 'admin' && solution.owner._id.toString() !== user.id) {
       throw new UnauthorizedException('User has no access to update this solution');
     }
     return await this.solutionsService.update(solution, newSolution);
@@ -48,7 +47,7 @@ export class SolutionsController {
   @Delete(':id')
   async remove(@Param('assignmentId') assignmentId: string, @Param('id') id: string, @User() user: AuthUser): Promise<Solution> {
     const solution = await this.solutionsService.findByAssignmentIdAndId(assignmentId, id);
-    if (user.role !== 'admin' && solution.owner._id !== user.id) {
+    if (user.role !== 'admin' && solution.owner._id.toString() !== user.id) {
       throw new UnauthorizedException('User has no access to delete this solution');
     }
     return await this.solutionsService.remove(solution);
