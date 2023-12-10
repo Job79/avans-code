@@ -40,7 +40,7 @@ export class AssignmentsController {
   @Put(':id')
   async update(@Param('id') id: string, @Body() newAssignment: UpdateAssignmentDto, @User() user: AuthUser): Promise<Assignment> {
     const assignment = await this.assignmentsService.findOne(id);
-    if (user.role !== 'admin' && assignment.owner._id !== user.id) {
+    if (user.role !== 'admin' && assignment.owner._id.toString() !== user.id) {
       throw new UnauthorizedException('User has no access to update this assignment');
     }
     return await this.assignmentsService.update(assignment, newAssignment);
@@ -49,7 +49,7 @@ export class AssignmentsController {
   @Delete(':id')
   async remove(@Param('id') id: string, @User() user: AuthUser): Promise<Assignment> {
     const assignment = await this.assignmentsService.findOne(id);
-    if (user.role !== 'admin' && assignment.owner._id !== user.id) {
+    if (user.role !== 'admin' && assignment.owner._id.toString() !== user.id) {
       throw new UnauthorizedException('User has no access to delete this assignment');
     }
     return await this.assignmentsService.remove(assignment);
