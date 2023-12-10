@@ -2,7 +2,6 @@ import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
 import {HydratedDocument, Schema as S} from 'mongoose';
 import {IComment, ISolution, IUser} from "@avans-code/shared/domain";
 import {CommentSchema} from "./comment.schema";
-import {Assignment} from "./assignment.schema";
 
 export type SolutionDocument = HydratedDocument<Solution>;
 
@@ -38,4 +37,4 @@ export const OnSolutionCreateHooks: ((doc: Solution) => Promise<void>)[] = [];
 SolutionSchema.post('save', (doc) => { OnSolutionCreateHooks.map(hook => hook(doc)) })
 
 export const OnSolutionDeleteHooks: ((doc: Solution) => Promise<void>)[] = [];
-SolutionSchema.post('deleteOne', (doc) => { OnSolutionDeleteHooks.map(hook => hook(doc)) })
+SolutionSchema.post('findOneAndDelete', (doc) => { OnSolutionDeleteHooks.map(hook => hook(doc)) })

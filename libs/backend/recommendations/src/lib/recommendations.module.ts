@@ -3,11 +3,13 @@ import {Neo4jModule, Neo4jScheme} from 'nest-neo4j';
 import {RecommendationsService} from "./recommendations.service";
 import {Neo4jConnection} from "nest-neo4j/dist";
 import {
+  Assignment, AssignmentSchema,
   OnAssignmentDeleteHooks,
   OnSolutionCreateHooks,
   OnSolutionDeleteHooks, OnUserDeleteHooks,
 } from "@avans-code/backend/schemas";
 import {RecommendationsController} from "./recommendations.controller";
+import {MongooseModule} from "@nestjs/mongoose";
 
 @Module({
   imports: [
@@ -19,6 +21,7 @@ import {RecommendationsController} from "./recommendations.controller";
       password: process.env['NEO4J_PASSWORD'] || 'password',
       database: process.env['NEO4J_DATABASE'] || 'neo4j'
     } as Neo4jConnection),
+    MongooseModule.forFeature([{name: Assignment.name, schema: AssignmentSchema}])
   ],
   controllers: [RecommendationsController],
   providers: [RecommendationsService],
