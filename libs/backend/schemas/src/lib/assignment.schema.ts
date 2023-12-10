@@ -2,7 +2,6 @@ import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
 import {HydratedDocument, Schema as S} from 'mongoose';
 import {IAssignment, INiveau, IUser, ITag} from "@avans-code/shared/domain";
 import {TagSchema} from "./tag.schema";
-import {Solution, SolutionSchema} from "./solution.schema";
 
 export type AssignmentDocument = HydratedDocument<Assignment>;
 
@@ -28,8 +27,8 @@ export class Assignment implements IAssignment {
     @Prop({required: true})
     programmingLanguage!: string;
 
-    @Prop({type: [TagSchema], required: true})
-    tags!: ITag[];
+    @Prop({type: [{_id: S.Types.ObjectId, name: String, category: String}], required: true})
+    tags!: Pick<ITag, "_id" | "name" | "category">[];
 
     @Prop({required: true})
     templateCode!: string;

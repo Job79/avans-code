@@ -6,7 +6,7 @@ export type TagDocument = HydratedDocument<Tag>;
 
 @Schema({versionKey: false})
 export class Tag implements ITag {
-    id!: string
+    _id!: string
 
     @Prop({required: true, unique: true})
     name!: string;

@@ -7,9 +7,6 @@
       <div *ngFor="let tag of assignment.tags" class="ml-3 label">
         {{tag.name}}
       </div>
-      <div class="ml-3 label !bg-orange-600">
-        {{assignment.niveau}}
-      </div>
     </div>
   </div>
   <div class="card p-4">
@@ -20,6 +17,9 @@
           {{assignment.name}}
           {{assignment.version !== 1 ? '(v' + assignment.version + ')' : ''}}
         </p>
+
+        <b class="text-sm font-bold block mt-2">Niveau</b>
+        <p>{{assignment.niveau}}</p>
 
         <b class="text-sm font-bold block mt-2">Programming Language</b>
         <p>{{assignment.programmingLanguage}}</p>

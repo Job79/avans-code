@@ -11,7 +11,7 @@ import {
 import {AssignmentsService} from "./assignments.service";
 import {Assignment} from "@avans-code/backend/schemas";
 import {CreateAssignmentDto} from "./dto/createAssignmentDto";
-import {AuthUser, User} from "@avans-code/backend/auth";
+import {AuthUser, Public, User} from "@avans-code/backend/auth";
 import {UpdateAssignmentDto} from "./dto/updateAssignmentDto";
 import {QueryAssignmentDto} from "./dto/queryAssignmentDto";
 
@@ -20,11 +20,13 @@ export class AssignmentsController {
   constructor(private assignmentsService: AssignmentsService) {
   }
 
+  @Public()
   @Get()
   async getData(@Query() query: QueryAssignmentDto) {
     return await this.assignmentsService.find(query)
   }
 
+  @Public()
   @Get(':id')
   async getOne(@Param('id') id: string): Promise<Assignment> {
     return await this.assignmentsService.findOne(id);

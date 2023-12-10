@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* Give body a gray background */
-nav {@apply fixed top-0 left-0 right-0 z-50 min-h-[7rem] }
+nav { @apply fixed top-0 left-0 right-0 z-50 min-h-[7rem] }
 body { @apply bg-gray-50 pt-[7rem] py-[2rem] }
 
 /* Cards styling */
@@ -23,5 +23,5 @@ body { @apply bg-gray-50 pt-[7rem] py-[2rem] }
 .input-text { @apply outline-none bg-gray-50 border border-gray-200 rounded-lg px-2 py-1 focus:border-gray-700 w-full max-w-[15rem] }
 .input-select { @apply input-text w-full max-w-[13.5rem] }
 .input-textarea { @apply input-text resize-none h-8 focus:h-64 focus:max-w-full  }
-
 .code-block { @apply bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 my-2 overflow-x-auto }
+

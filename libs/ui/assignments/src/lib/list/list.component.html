@@ -29,11 +29,14 @@
         {{assignment.niveau}}
       </div>
     </div>
-    <div>
+    <div *ngIf="(user$ | async)?.role === 'admin' || (user$ | async)?._id === assignment.owner._id">
       <a class="btn btn-secondary" routerLink="{{assignment._id}}/edit" (click)="$event.stopPropagation()">
         <fa-icon [icon]="icon.faPencil"></fa-icon>
       </a>
     </div>
   </a>
+  <div *ngIf="(assignments$ | async)?.length === 0" class="p-5 text-center">
+    <p class="text-lg">No assignments found</p>
+  </div>
 </div>
 

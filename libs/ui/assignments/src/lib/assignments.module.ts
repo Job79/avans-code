@@ -17,7 +17,9 @@ import {EditComponent} from "./edit/edit.component";
     FormsModule
   ],
   declarations: [ListComponent, DetailsComponent, EditComponent],
-  providers: [provideRouter(assignmentRoutes)],
+  providers: [
+    provideRouter(assignmentRoutes)
+  ],
   exports: []
 })
 export class AssignmentsModule {

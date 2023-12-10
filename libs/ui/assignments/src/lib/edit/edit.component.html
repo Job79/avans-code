@@ -41,6 +41,13 @@
     </div>
 
     <div class="row">
+      <p>Is Public</p>
+      <button type="button" (click)="assignment.isPublic = !assignment.isPublic" class="text-3xl border-0">
+        <fa-icon [icon]="assignment.isPublic ? icon.faToggleOn : icon.faToggleOff" class="mx-1"></fa-icon>
+      </button>
+    </div>
+
+    <div class="row">
       <p>Programming Language</p>
       <input
         name="programmingLanguage"

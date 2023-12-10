@@ -1,35 +1,28 @@
 import {Injectable} from "@angular/core";
-import { ITag } from "@avans-code/shared/domain";
-import {Observable, of} from "rxjs";
+import {ITag} from "@avans-code/shared/domain";
+import {Observable, of, tap} from "rxjs";
+import {Environment} from "@avans-code/ui/env";
+import {HttpClient} from "@angular/common/http";
 
-@Injectable(
-  {providedIn: 'root'}
-)
+@Injectable({providedIn: 'root'})
 export class TagsService {
-  db: ITag[] = []
+  private fetched = false
+  private cache: ITag[] = []
+
+  constructor(private http: HttpClient) {
+  }
 
   public tags(): Observable<ITag[]> {
-    return of<ITag[]>(this.db)
-  }
+    if (this.fetched) {
+      return of<ITag[]>(this.cache)
+    }
 
-  public create(tag: ITag): Observable<ITag> {
-    this.db.push(tag)
-    return of<ITag>(tag)
-  }
-
-  public update(tag: ITag): Observable<ITag> {
-    const idx = this.db.findIndex(u => u.name === tag.name)
-    this.db[idx] = tag
-    return of<ITag>(tag)
-  }
-
-  public delete(name: string): Observable<boolean> {
-    const idx = this.db.findIndex(u => u.name === name)
-    this.db.splice(idx, 1)
-    return of<boolean>(true)
-  }
-
-  public query(name: string): Observable<ITag[]> {
-    return of<ITag[]>(this.db.filter(u => u.name.toLowerCase().includes(name.toLowerCase())))
+    return this.http.get<ITag[]>(Environment.api.url + '/tags')
+      .pipe(
+        tap(data => {
+          this.fetched = true
+          this.cache = data
+        })
+      )
   }
 }

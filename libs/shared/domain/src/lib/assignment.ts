@@ -14,7 +14,7 @@ export interface IAssignment {
   timestamp?: Date;
   niveau: INiveau;
   tags: ITag[];
-  owner?: Pick<IUser, '_id' | 'name'>;
+  owner: Pick<IUser, '_id' | 'name'>;
 }
 
 export type ICreateAssignment = Pick<IAssignment, 'name' | 'description' | 'isPublic' | 'programmingLanguage' | 'templateCode' | 'testCode' | 'niveau' | 'tags'>;

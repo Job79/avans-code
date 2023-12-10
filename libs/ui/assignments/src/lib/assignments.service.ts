@@ -1,46 +1,67 @@
 import {Injectable} from "@angular/core";
-import {IAssignment} from "@avans-code/shared/domain";
-import {Observable, of, throwError} from "rxjs";
+import {IAssignment, ICreateAssignment, IUpdateAssignment} from "@avans-code/shared/domain";
+import {Observable, of, switchMap, tap, throwError} from "rxjs";
+import {HttpClient} from "@angular/common/http";
+import {Environment} from "@avans-code/ui/env";
 
-@Injectable(
-  {providedIn: 'root'}
-)
+@Injectable({providedIn: 'root'})
 export class AssignmentsService {
-  cache: IAssignment[] = []
+  private fetched = false
+  private cache: IAssignment[] = []
+
+  constructor(private http: HttpClient) {
+  }
 
   public assignments(): Observable<IAssignment[]> {
-    return of<IAssignment[]>(this.cache)
+    if (this.fetched) {
+      return of<IAssignment[]>(this.cache)
+    }
+
+    return this.http.get<IAssignment[]>(Environment.api.url + '/assignments')
+      .pipe(
+        tap(data => {
+          this.fetched = true
+          this.cache = data
+        })
+      )
   }
 
   public assignment(id: string): Observable<IAssignment> {
-    const assignment = this.cache.find(assignment => assignment._id === id)
-    if (assignment) {
-      return of<IAssignment>(assignment)
+    if (this.fetched) {
+      const assignment = this.cache.find(u => u._id === id)
+      return assignment ? of<IAssignment>(assignment) : throwError('Assignment not found')
     }
-    return throwError(() => new Error('Assignment not found'))
+
+    return this.http.get<IAssignment>(Environment.api.url + '/assignments/' + id)
   }
 
-  public create(assignment: IAssignment): Observable<IAssignment> {
-
-    assignment._id = (this.cache.length + 1).toString()
-    this.cache.push(assignment)
-    return of<IAssignment>(assignment)
+  public create(assignment: ICreateAssignment): Observable<IAssignment> {
+    return this.http.post<IAssignment>(Environment.api.url + '/assignments', assignment)
+      .pipe(tap(data => {
+        this.cache.push(data)
+      }))
   }
 
-  public update(assignment: IAssignment): Observable<IAssignment> {
-    const idx = this.cache.findIndex(u => u._id === assignment._id)
-    assignment.version++
-    this.cache[idx] = assignment
-    return of<IAssignment>(assignment)
+  public update(id: string, assignment: IUpdateAssignment): Observable<IAssignment> {
+    return this.http.put<IAssignment>(Environment.api.url + '/assignments/' + id, assignment)
+      .pipe(tap(data => {
+        const idx = this.cache.findIndex(u => u._id === id)
+        this.cache[idx] = data
+      }))
   }
 
   public delete(id: string): Observable<boolean> {
-    const idx = this.cache.findIndex(u => u._id === id)
-    this.cache.splice(idx, 1)
-    return of<boolean>(true)
+    return this.http.delete<boolean>(Environment.api.url + '/assignments/' + id)
+      .pipe(tap(() => {
+        this.cache = this.cache.filter(u => u._id !== id)
+      }))
   }
 
-  search(query: string) {
+  search(query: string): Observable<IAssignment[]> {
+    if (!this.fetched) {
+      return this.assignments().pipe(switchMap(() => this.search(query)))
+    }
+
     return of<IAssignment[]>(this.cache.filter(assignment => assignment.name.toLowerCase().includes(query.toLowerCase())))
   }
 }
