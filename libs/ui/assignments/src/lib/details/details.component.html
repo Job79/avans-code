@@ -21,6 +21,9 @@
         <b class="text-sm font-bold block mt-2">Niveau</b>
         <p>{{assignment.niveau}}</p>
 
+        <b class="text-sm font-bold block mt-2">Owner</b>
+        <a routerLink="/users/{{assignment.owner._id}}" class="underline">{{assignment.owner.name}}</a>
+
         <b class="text-sm font-bold block mt-2">Programming Language</b>
         <p>{{assignment.programmingLanguage}}</p>
 

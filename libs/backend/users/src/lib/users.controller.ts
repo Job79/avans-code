@@ -2,7 +2,7 @@ import {Body, Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
 import {UsersService} from "./users.service";
 import {User} from "@avans-code/backend/schemas";
 import {CreateUserDto} from "./dto/createUserDto";
-import {Roles} from "@avans-code/backend/auth";
+import {Public, Roles} from "@avans-code/backend/auth";
 import {UpdateUserDto} from "./dto/updateUserDto";
 
 @Controller('users')
@@ -15,6 +15,7 @@ export class UsersController {
     return await this.usersService.findAll()
   }
 
+  @Public()
   @Get(':id')
   async getOne(@Param('id') id: string): Promise<User> {
     return await this.usersService.findOne(id);

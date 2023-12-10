@@ -27,6 +27,5 @@ export const userRoutes: Route[] = [
     path: ':id',
     pathMatch: 'full',
     component: DetailsComponent,
-    canActivate: [IsLoggedIn, IsAdmin]
   }
 ];
