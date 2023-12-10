@@ -46,5 +46,5 @@ export class Assignment implements IAssignment {
 export const AssignmentSchema = SchemaFactory.createForClass(Assignment);
 
 export const OnAssignmentDeleteHooks: ((doc: Assignment) => Promise<void>)[] = [];
-AssignmentSchema.post('deleteOne', (doc) => { OnAssignmentDeleteHooks.map(hook => hook(doc)) })
+AssignmentSchema.post('findOneAndDelete', (doc) => { OnAssignmentDeleteHooks.map(hook => hook(doc)) })
 

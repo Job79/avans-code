@@ -1,14 +1,18 @@
 import {Injectable} from '@nestjs/common';
 import {Neo4jService} from "nest-neo4j/dist";
 import {Assignment, Solution, User} from "@avans-code/backend/schemas";
+import {InjectModel} from "@nestjs/mongoose";
+import {Model} from "mongoose";
+import {IAssignment} from "@avans-code/shared/domain";
 
 @Injectable()
 export class RecommendationsService {
 
-  constructor(private readonly neo4jService: Neo4jService) {
+  constructor(@InjectModel(Assignment.name) private assignmentModel: Model<Assignment>,
+              private neo4jService: Neo4jService) {
   }
 
-  public async getRecommendationsForUser(userId: string): Promise<string[]> {
+  public async getRecommendationsForUser(userId: string): Promise<IAssignment[]> {
     const oneYearAgo = Math.floor((Date.now() - 365 * 24 * 60 * 60 * 1000) / 1000);
     const query = 'MATCH (user:USER {userId: $userId})-[r:MADE]->(:ASSIGNMENT)<-[:MADE]-(otherUser:USER)-[:MADE]->(otherAssignment:ASSIGNMENT) ' +
       'WHERE r.timestamp > $oneYearAgo AND NOT (user)-[:MADE]->(otherAssignment) ' +
@@ -16,7 +20,8 @@ export class RecommendationsService {
       'ORDER BY count'
 
     const result = await this.neo4jService.read(query, {userId, oneYearAgo});
-    return result.records.map(record => record.get('otherAssignment.assignmentId'));
+    const assignmentIds = result.records.map(record => record.get('otherAssignment.assignmentId'))
+    return await this.assignmentModel.find({_id: {$in: assignmentIds}}).exec();
   }
 
   public async addSolution(solution: Solution) {
