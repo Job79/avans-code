@@ -39,14 +39,23 @@ export class UsersService {
   }
 
   async update(id: string, user: UpdateUserDto): Promise<UserDocument> {
-    user.password = await bcrypt.hash(user.password, 10);
-
     try {
-      const existingUser = await this.userModel.findByIdAndUpdate(id, user).exec();
+      const existingUser = await this.userModel.findById(id).select('+password').exec()
       if (!existingUser) {
         throw new NotFoundException('User not found');
       }
-      return existingUser;
+
+      if(user.password) {
+        user.password = await bcrypt.hash(user.password, 10);
+      } else {
+        user.password = existingUser.password;
+      }
+
+      existingUser.set({...user})
+      await existingUser.save()
+
+      existingUser.password = ''
+      return existingUser
     } catch (err) {
       if (err instanceof MongoServerError && err.code === 11000) {
         throw new BadRequestException('Email already in use')

@@ -1,5 +1,5 @@
 import {IUpdateUser, IRole, Roles} from "@avans-code/shared/domain";
-import {IsEmail, IsIn, IsString, IsUrl, MaxLength, MinLength} from "class-validator";
+import {IsEmail, IsIn, IsOptional, IsString, IsUrl, MaxLength, MinLength} from "class-validator";
 
 export class UpdateUserDto implements IUpdateUser {
   @IsString()
@@ -10,6 +10,7 @@ export class UpdateUserDto implements IUpdateUser {
   @IsEmail()
   email!: string;
 
+  @IsOptional()
   @IsString()
   @MinLength(8)
   password!: string;

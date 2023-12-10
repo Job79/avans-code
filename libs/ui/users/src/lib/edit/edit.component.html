@@ -1,6 +1,6 @@
 <form #userForm="ngForm" name="form" (ngSubmit)="userForm.form.markAllAsTouched(); userForm.form.valid && save()">
   <div class="card-header">
-    <p class="card-title">{{user._id ? 'Edit' : 'Create'}} User</p>
+    <p class="card-title">{{ user._id ? 'Edit' : 'Create' }} User</p>
     <div>
       <button type="button" *ngIf="user._id" class="btn btn-primary mx-1" (click)="delete()">
         <fa-icon [icon]="icon.faTrashCan" class="mx-1"></fa-icon>
@@ -29,59 +29,54 @@
 
     <div class="row">
       <p>Email</p>
-      <div class="flex items-center">
-        <div *ngIf="email.touched && email.invalid" class="mr-3 label">
-          Invalid email
-        </div>
-        <input
-          name="email"
-          class="input-text"
-          type="email"
-          #email="ngModel"
-          [ngClass]="{'!border-red-500': email.touched && email.invalid}"
-          [(ngModel)]="user.email"
-          email
-          required>
+      <div *ngIf="email.touched && email.invalid" class="ml-auto mr-3 label">
+        Invalid email
       </div>
+      <input
+        name="email"
+        class="input-text"
+        type="email"
+        #email="ngModel"
+        [ngClass]="{'!border-red-500': email.touched && email.invalid}"
+        [(ngModel)]="user.email"
+        email
+        required>
     </div>
 
     <div class="row">
       <p>Password</p>
-      <div class="flex items-center">
-        <div *ngIf="password.touched && password.invalid" class="mr-3 label">
-          Minimum 8 characters
-        </div>
-        <input
-          name="password"
-          type="password"
-          class="input-text"
-          #password="ngModel"
-          [ngClass]="{'!border-red-500': password.touched && password.invalid}"
-          [(ngModel)]="user.password"
-          minlength="8"
-          required>
+      <div *ngIf="password.touched && password.invalid" class="ml-auto mr-3 label">
+        Minimum 8 characters
       </div>
+      <input
+        name="password"
+        type="password"
+        class="input-text"
+        #password="ngModel"
+        [ngClass]="{'!border-red-500': password.touched && password.invalid}"
+        [(ngModel)]="user.password"
+        minlength="8"
+        [required]="!user._id">
     </div>
 
     <div class="row">
       <p>ProfileUrl</p>
-      <div class="flex">
-        <img *ngIf="user.profileUrl" [src]="user.profileUrl" class="w-8 h-8 rounded-full mr-2">
-        <input
-          name="profile"
-          type="url"
-          class="input-text"
-          #profile="ngModel"
-          [ngClass]="{'!border-red-500': profile.touched && profile.invalid}"
-          [(ngModel)]="user.profileUrl"
-          required>
-      </div>
+      <img *ngIf="user.profileUrl" [src]="user.profileUrl" class="w-8 h-8 rounded-full ml-auto mr-2">
+      <input
+        name="profile"
+        type="url"
+        class="input-text"
+        #profile="ngModel"
+        [ngClass]="{'!border-red-500': profile.touched && profile.invalid}"
+        [(ngModel)]="user.profileUrl"
+        pattern="https?://.+"
+        required>
     </div>
 
     <div class="row">
       <p>Role</p>
       <select name="role" class="input-select" [(ngModel)]="user.role">
-        <option *ngFor="let role of options.roles" [ngValue]="role">{{role}}</option>
+        <option *ngFor="let role of options.roles" [ngValue]="role">{{ role }}</option>
       </select>
     </div>
   </div>

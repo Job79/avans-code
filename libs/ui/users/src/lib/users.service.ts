@@ -1,88 +1,67 @@
 import {Injectable} from "@angular/core";
-import {IUser} from "@avans-code/shared/domain";
-import {Observable, of, throwError} from "rxjs";
+import {ICreateUser, IUpdateUser, IUser} from "@avans-code/shared/domain";
+import {Observable, of, switchMap, tap, throwError} from "rxjs";
+import {HttpClient} from "@angular/common/http";
+import {Environment} from "@avans-code/ui/env";
 
-@Injectable(
-  {providedIn: 'root'}
-)
+@Injectable({providedIn: 'root'})
 export class UsersService {
-  db: IUser[] = [
-    {
-      _id: '1',
-      name: 'John Doe',
-      email: 'john.doe@gmail.com',
-      password: '12345678',
-      profileUrl: 'https://picsum.photos/id/1/200',
-      role: 'admin'
-    },
-    {
-      _id: '2',
-      name: 'Jane Doe',
-      email: 'jane.doe@gmail.com',
-      password: '12345678',
-      profileUrl: 'https://picsum.photos/id/2/200',
-      role: 'teacher'
-    },
-    {
-      _id: '3',
-      name: 'John Dodo',
-      email: 'john.dodo@gmail.com',
-      password: '12345678',
-      profileUrl: 'https://picsum.photos/id/3/200',
-      role: 'student'
-    },
-    {
-      _id: '4',
-      name: 'Jane Dodo',
-      email: 'jane.dodo@gmail.com',
-      password: '12345678',
-      profileUrl: 'https://picsum.photos/id/4/200',
-      role: 'student'
-    },
-    {
-      _id: '5',
-      name: 'John Dedodo',
-      email: 'john.dedodo@gmail.com',
-      password: '12345678',
-      profileUrl: 'https://picsum.photos/id/5/200',
-      role: 'student'
-    }
-  ]
+  private fetched = false
+  private cache: IUser[] = []
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
   public users(): Observable<IUser[]> {
-    return of<IUser[]>(this.db)
+    if (this.fetched) {
+      return of<IUser[]>(this.cache)
+    }
+
+    return this.http.get<IUser[]>(Environment.api.url + '/users')
+      .pipe(
+        tap(data => {
+          this.fetched = true
+          this.cache = data
+        })
+      )
   }
 
   public user(id: string): Observable<IUser> {
-    const user = this.db.find(user => user._id === id)
-    if (user) {
-      return of<IUser>(user)
+    if (this.fetched) {
+      const user = this.cache.find(u => u._id === id)
+      return user ? of<IUser>(user) : throwError('User not found')
     }
-    return throwError(() => new Error('User not found'))
+
+    return this.http.get<IUser>(Environment.api.url + '/users/' + id)
   }
 
-  public create(user: IUser): Observable<IUser> {
-    user._id = (this.db.length + 1).toString()
-    this.db.push(user)
-    return of<IUser>(user)
+  public create(user: ICreateUser): Observable<IUser> {
+    return this.http.post<IUser>(Environment.api.url + '/users', user)
+      .pipe(tap(data => {
+        this.cache.push(data)
+      }))
   }
 
-  public update(user: IUser): Observable<IUser> {
-    const idx = this.db.findIndex(u => u._id === user._id)
-    this.db[idx] = user
-    return of<IUser>(user)
+  public update(id: string, user: IUpdateUser): Observable<IUser> {
+    return this.http.put<IUser>(Environment.api.url + '/users/' + id, user)
+      .pipe(tap(data => {
+        const idx = this.cache.findIndex(u => u._id === id)
+        this.cache[idx] = data
+      }))
   }
 
   public delete(id: string): Observable<boolean> {
-    const idx = this.db.findIndex(u => u._id === id)
-    this.db.splice(idx, 1)
-    return of<boolean>(true)
+    return this.http.delete<boolean>(Environment.api.url + '/users/' + id)
+      .pipe(tap(() => {
+        this.cache = this.cache.filter(u => u._id !== id)
+      }))
   }
 
-  search(query: string) {
-    return of<IUser[]>(this.db.filter(user => user.name.toLowerCase().includes(query.toLowerCase())))
+  search(query: string): Observable<IUser[]> {
+    if (!this.fetched) {
+      return this.users().pipe(switchMap(() => this.search(query)))
+    }
+
+    return of<IUser[]>(this.cache.filter(user => user.email.toLowerCase().includes(query.toLowerCase())))
   }
 }

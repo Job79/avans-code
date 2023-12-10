@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {IUser, Roles} from "@avans-code/shared/domain";
+import {ICreateUser, IUpdateUser, IUser, Roles} from "@avans-code/shared/domain";
 import {ActivatedRoute} from "@angular/router";
 import {UsersService} from "../users.service";
 import {faFloppyDisk, faTrashCan} from "@fortawesome/free-solid-svg-icons";
@@ -39,21 +39,19 @@ export class EditComponent implements OnInit {
   }
 
   save() {
+    const body = {...this.user} as Partial<IUser>
+    delete body._id
+
     if (this.user._id === '') {
-      this.userService.create(this.user).subscribe(
-        () => window.history.back()
-      )
+      this.userService.create(body as ICreateUser).subscribe(() => window.history.back())
       return
     }
 
-    this.userService.update(this.user).subscribe(
-      () => window.history.back()
-    )
+    this.userService.update(this.user._id, body as IUpdateUser).subscribe( () => window.history.back())
   }
 
   delete() {
-    this.userService.delete(this.user._id).subscribe(
-      () => window.history.back()
-    )
+    this.userService.delete(this.user._id)
+      .subscribe(() => window.history.back())
   }
 }

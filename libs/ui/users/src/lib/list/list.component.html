@@ -21,7 +21,7 @@
     routerLink="{{user._id}}"
     class="row !py-5 cursor-pointer hover:bg-gray-100">
     <div class="flex items-center">
-      {{user.name}}
+      {{user.email}}
       <div class="ml-3 label">
         {{user.role}}
       </div>
@@ -32,5 +32,8 @@
       </a>
     </div>
   </a>
+  <div *ngIf="(users$ | async)?.length === 0" class="p-5 text-center">
+    <p class="text-lg">No users found</p>
+  </div>
 </div>
 
