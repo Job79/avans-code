@@ -10,18 +10,6 @@
       "options": {
         "lintFilePatterns": ["libs/ui/env/**/*.ts"]
       }
-    },
-    "build": {
-      "configurations": {
-        "production": {
-          "fileReplacements": [
-            {
-              "replace": "libs/ui/env/src/lib/environment.ts",
-              "with": "libs/ui/env/src/lib/environment.production.ts"
-            }
-          ]
-        }
-      }
     }
   },
   "tags": ["type:util", "scope:shared"]
