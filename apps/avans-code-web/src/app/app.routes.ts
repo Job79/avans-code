@@ -25,6 +25,10 @@ export const appRoutes: Route[] = [
     loadChildren: () => import('@avans-code/ui/tags').then(m => m.TagsModule)
   },
   {
+    path: 'recommendations',
+    loadChildren: () => import('@avans-code/ui/recommendations').then(m => m.RecommendationsModule)
+  },
+  {
     path: 'auth',
     loadChildren: () => AuthModule
   }
