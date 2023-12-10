@@ -1,4 +1,4 @@
-<nav class="flex items-center justify-between flex-wrap bg-red-800 p-6">
+<nav class="flex items-center justify-between flex-wrap bg-red-800 p-6" *ngIf="user$ | async as user">
   <a routerLink="/users" class="flex items-center flex-shrink-0 text-white mr-6">
     <svg class="fill-current mr-2 h-16 w-16" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -14,9 +14,9 @@
       </svg>
     </button>
   </div>
-  <div [ngClass]="{'hidden': hidden}" class="hidden w-full flex-grow md:flex md:items-center md:w-auto">
+  <div [ngClass]="{'hidden': hidden}" class="hidden w-full flex-grow md:flex md:items-center md:w-auto" (click)="hidden = true">
     <div class="text-sm md:flex-grow">
-      <a routerLink="/users" routerLinkActive="font-bold" class="block mt-4 md:mt-0 md:inline-block text-red-100 hover:text-white mr-4">
+      <a *ngIf="user.role === 'admin'" routerLink="/users" routerLinkActive="font-bold" class="block mt-4 md:mt-0 md:inline-block text-red-100 hover:text-white mr-4">
         Users
       </a>
       <a routerLink="/assignments" routerLinkActive="font-bold" class="block mt-4 md:mt-0 md:inline-block text-red-100 hover:text-white mr-4">
@@ -26,10 +26,16 @@
         About
       </a>
     </div>
-    <div>
-      <a class="flex items-center text-white border rounded-lg py-2 px-3 w-min mt-4 md:mt-0">
+    <div *ngIf="user?.isLoggedIn === false">
+      <a routerLink="/auth/login" class="flex items-center text-white border rounded-lg py-2 px-3 w-min mt-4 md:mt-0">
         <fa-icon [icon]="icon.faRightToBracket" class="text-xl mr-4"></fa-icon>
         Login
+      </a>
+    </div>
+    <div *ngIf="user?.isLoggedIn === true">
+      <a (click)="logout()" class="flex items-center text-white border rounded-lg py-2 px-3 w-min mt-4 md:mt-0">
+        <fa-icon [icon]="icon.faRightToBracket" class="text-xl mr-4"></fa-icon>
+        Logout
       </a>
     </div>
   </div>
