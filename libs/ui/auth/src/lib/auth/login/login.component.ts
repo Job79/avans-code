@@ -24,9 +24,11 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    if(this.authService.user$.value.isLoggedIn) {
-      this.router.navigate(['/'])
-    }
+    this.authService.user$.subscribe((user) => {
+      if(user.isLoggedIn) {
+        window.history.back()
+      }
+    })
   }
 
   login() {
