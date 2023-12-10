@@ -3,8 +3,8 @@ import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor, IsAdmin, IsLoggedIn} from "@avans-code/ui/auth";
-import {ErrorInterceptor} from "./error.interceptor";
-import {ErrorService} from "./error.service";
+import {ErrorInterceptor} from "./error/error.interceptor";
+import {ErrorService} from "./error/error.service";
 
 export const appConfig: ApplicationConfig = {
   providers: [

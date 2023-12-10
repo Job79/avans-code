@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {ITag} from "@avans-code/shared/domain";
-import {Observable, of, tap} from "rxjs";
+import {map, Observable, of, tap} from "rxjs";
 import {Environment} from "@avans-code/ui/env";
 import {HttpClient} from "@angular/common/http";
 
@@ -21,8 +21,9 @@ export class TagsService {
       .pipe(
         tap(data => {
           this.fetched = true
-          this.cache = data
-        })
+          this.cache = data.filter(tag => tag.isActive)
+        }),
+        map(() => this.cache)
       )
   }
 }

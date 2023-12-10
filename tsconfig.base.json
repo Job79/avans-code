@@ -30,6 +30,7 @@
       "@avans-code/ui/auth": ["libs/ui/auth/src/index.ts"],
       "@avans-code/ui/env": ["libs/ui/env/src/index.ts"],
       "@avans-code/ui/layout": ["libs/ui/layout/src/index.ts"],
+      "@avans-code/ui/tags": ["libs/ui/tags/src/index.ts"],
       "@avans-code/ui/users": ["libs/ui/users/src/index.ts"]
     }
   },

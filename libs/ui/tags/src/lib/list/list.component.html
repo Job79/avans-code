@@ -1,0 +1,39 @@
+<div class="card-header">
+  <p class="card-title">Tags</p>
+  <div>
+    <button class="btn btn-primary" routerLink="create">
+      <fa-icon [icon]="icon.faPlus"></fa-icon>
+      Create Tag
+    </button>
+  </div>
+</div>
+<div class="card">
+  <div class="flex h-12 bg-gray-50 relative">
+    <input
+      class="outline-none bg-transparent w-full px-4"
+      placeholder="Search tags..."
+      (input)="search()"
+      [(ngModel)]="query">
+    <fa-icon [icon]="icon.faSearch" class="text-lg absolute top-1/2 -translate-y-1/2 right-4"></fa-icon>
+  </div>
+  <a
+    *ngFor="let tag of tags$ | async"
+    routerLink="{{tag._id}}"
+    class="row !py-5 cursor-pointer hover:bg-gray-100">
+    <div class="flex items-center">
+      {{tag.name}}
+      <div class="ml-3 label">
+        {{tag.category}}
+      </div>
+    </div>
+    <div>
+      <a class="btn btn-secondary" routerLink="{{tag._id}}/edit" (click)="$event.stopPropagation()">
+        <fa-icon [icon]="icon.faPencil"></fa-icon>
+      </a>
+    </div>
+  </a>
+  <div *ngIf="(tags$ | async)?.length === 0" class="p-5 text-center">
+    <p class="text-lg">No tags found</p>
+  </div>
+</div>
+

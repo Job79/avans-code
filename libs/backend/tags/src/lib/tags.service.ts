@@ -38,11 +38,9 @@ export class TagsService {
 
   async update(id: string, tag: UpdateTagDto): Promise<TagDocument> {
     try {
-      const existingTag = await this.tagModel.findByIdAndUpdate(id, tag).exec();
-      if (!existingTag) {
-        throw new NotFoundException('Tag not found');
-      }
-      return existingTag;
+      const existingTag = await this.findOne(id)
+      existingTag.set({...tag})
+      return await existingTag.save()
     } catch (err) {
       if (err instanceof MongoServerError && err.code === 11000) {
         throw new BadRequestException('Tag name already in use')
