@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 import {AboutComponent} from "./about/about.component";
+import {AuthModule} from "@avans-code/ui/auth";
 
 export const appRoutes: Route[] = [
   {
@@ -18,5 +19,9 @@ export const appRoutes: Route[] = [
   {
     path: 'assignments',
     loadChildren: () => import('@avans-code/ui/assignments').then(m => m.AssignmentsModule)
+  },
+  {
+    path: 'auth',
+    loadChildren: () => AuthModule
   }
 ];
