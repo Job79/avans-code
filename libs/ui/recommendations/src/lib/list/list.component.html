@@ -1,0 +1,23 @@
+<div class="card-header">
+  <p class="card-title">Recommendations</p>
+</div>
+<div class="card">
+  <a
+    *ngFor="let assignment of assignments$ | async"
+    routerLink="{{assignment._id}}"
+    class="row !py-5 cursor-pointer hover:bg-gray-100">
+    <div class="flex items-center">
+      {{assignment.name}}
+      <div *ngFor="let tag of assignment.tags" class="ml-3 label">
+        {{tag.name}}
+      </div>
+      <div class="ml-3 label !bg-orange-600">
+        {{assignment.niveau}}
+      </div>
+    </div>
+  </a>
+  <div *ngIf="(assignments$ | async)?.length === 0" class="p-5 text-center">
+    <p class="text-lg">No recommendations</p>
+  </div>
+</div>
+
