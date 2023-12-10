@@ -1,0 +1,28 @@
+{
+  "name": "env",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/ui/env/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/ui/env/**/*.ts"]
+      }
+    },
+    "build": {
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "libs/ui/env/src/lib/environment.ts",
+              "with": "libs/ui/env/src/lib/environment.production.ts"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "tags": ["type:util", "scope:shared"]
+}
