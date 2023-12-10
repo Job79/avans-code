@@ -8,7 +8,7 @@ export interface ISolution {
   assignmentId: string;
   code: string;
   timestamp: Date;
-  owner?: Pick<IUser, '_id' | 'name'>;
+  owner: Pick<IUser, '_id' | 'name'>;
   comments: IComment[]
 }
 
