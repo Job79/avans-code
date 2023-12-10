@@ -21,6 +21,10 @@ export const appRoutes: Route[] = [
     loadChildren: () => import('@avans-code/ui/assignments').then(m => m.AssignmentsModule)
   },
   {
+    path: 'tags',
+    loadChildren: () => import('@avans-code/ui/tags').then(m => m.TagsModule)
+  },
+  {
     path: 'auth',
     loadChildren: () => AuthModule
   }

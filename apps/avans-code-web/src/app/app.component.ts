@@ -4,7 +4,7 @@ import {LayoutModule} from "@avans-code/ui/layout";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
 import {AsyncPipe, NgIf} from "@angular/common";
-import {ErrorService} from "./error.service";
+import {ErrorService} from "./error/error.service";
 
 @Component({
   standalone: true,

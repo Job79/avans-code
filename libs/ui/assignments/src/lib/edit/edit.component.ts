@@ -58,7 +58,7 @@ export class EditComponent implements OnInit {
       this.options.tags = tags
 
       // Use references from tags to show tags as selected
-      this.assignment.tags = this.assignment.tags?.map(t => tags.find(tag => tag.name === t.name)!)
+      this.assignment.tags = this.assignment.tags?.map(t => tags.find(tag => tag.name === t.name)!).filter(Boolean)
     })
   }
 
